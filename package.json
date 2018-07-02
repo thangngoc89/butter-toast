@@ -41,7 +41,7 @@
   },
   "devDependencies": {
     "@storybook/react": "3.3.11",
-    "@storybook/addon-actions": "3.3.11",
+    "@storybook/addon-actions": "4.0.0-alpha.11",
     "babel-cli": "^6.24.1",
     "babel-jest": "^22.0.4",
     "babel-loader": "^7.1.2",
