@@ -1,8 +1,8 @@
-import ReactDOM from 'react-dom';
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
-import defaults from './defaults';
-import { generateClassName, findByClassName } from './helpers';
+import { DIR_RIGHT, DIR_TOP } from './styles';
+import styles from './styles';
 import Tray from '../Tray';
 
 class ButterToast extends Component {
@@ -16,22 +16,24 @@ class ButterToast extends Component {
     }
 
     static unmount(props, _tray) {
-        const className = generateClassName(props),
-            root = findByClassName(className);
 
         if (_tray) {
             window.removeEventListener('ButterToast', _tray.onButterToast);
         }
 
-        ReactDOM.unmountComponentAtNode(root);
-        root.parentNode.removeChild(root);
+        if (!this.root) {
+            return;
+        }
+
+        ReactDOM.unmountComponentAtNode(this.root);
+        this.root.parentNode.removeChild(this.root);
+        delete this.root;
     }
 
     constructor(props) {
         super(props);
 
-        this.config = Object.assign({}, defaults, props);
-        this.className = generateClassName(this.config);
+        this.config = {};
         this.theme = '';
         if (this.config.theme) {
             this.theme = ` bt-theme-${this.config.theme}`;
@@ -44,17 +46,22 @@ class ButterToast extends Component {
             return;
         }
 
-        if (findByClassName(this.className)) {
-            return;
-        }
+        const {
+            direction
+        } = this.props;
 
         const className = `${this.className}${this.theme}`;
 
-        const root = document.createElement('aside');
-        root.setAttribute('class', className);
-        document.body.appendChild(root);
+        const style = styles({ vertical: direction.vertical, horizontal: direction.horizontal });
+        this.root = document.createElement('aside');
+        this.root.setAttribute('class', className);
+        Object.assign(this.root.style, style);
+        document.body.appendChild(this.root);
 
-        ReactDOM.render(<Tray ref={(tray) => this._tray = tray} {...this.config}/>, root);
+        ReactDOM.render(<Tray ref={this.createTrayRef}
+                direction={direction}
+                {...this.config} />,
+            this.root);
     }
 
     componentWillUnmount() {
@@ -63,13 +70,23 @@ class ButterToast extends Component {
         }
     }
 
+    createTrayRef = (ref) => {
+        window._btTrays = window._btTrays || {};
+
+        if (!ref) {
+            return;
+        }
+
+        window._btTrays[ref.id] = ref;
+    }
+
     render() {
         if (this.props.renderInContext) {
             const className = `${this.className}${this.theme}`;
 
             return (
                 <aside className={className}>
-                    <Tray ref={(tray) => this._tray = tray} {...this.config}/>
+                    <Tray ref={this.createTrayRef} {...this.config}/>
                 </aside>
             );
         } else {
@@ -80,6 +97,13 @@ class ButterToast extends Component {
 
 ButterToast.propTypes = {
     renderInContext: PropTypes.bool
+};
+
+ButterToast.defaultProps = {
+    direction: {
+        vertical: DIR_TOP,
+        horizontal: DIR_RIGHT
+    }
 };
 
 export default ButterToast;
