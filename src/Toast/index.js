@@ -16,21 +16,34 @@ class Toast extends Toggler {
         setTimeout(this.open);
     }
 
+    startTimeout() {
+        this.clearTimeout();
+        this.timeout = setTimeout(this.close, this.props.toast.timeout);
+    }
+
+    clearTimeout() {
+        clearTimeout(this.timeout);
+    }
+
     togglerDidOpen() {
         const ref = this.toastRef;
         const {
             setHeight, toast
         } = this.props;
 
-        this.setState({
-            shown: true
-        }, () => {
-            setHeight(toast.id, ref.clientHeight);
+        setTimeout(() => {
+            this.setState({
+                shown: true
+            }, () => {
+                setHeight(toast.id, ref.clientHeight);
+                this.startTimeout();
+            });
         });
     }
 
     togglerWillClose(done) {
         const ref = this.toastRef;
+        this.clearTimeout();
 
         this.setState({
             shown: false,

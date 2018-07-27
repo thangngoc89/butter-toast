@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { DIR_LEFT } from '../ButterToast/styles';
+import { POS_LEFT, POS_BOTTOM } from '../ButterToast/styles';
 
 const Ul = styled.ul`
     position: relative;
@@ -7,16 +7,19 @@ const Ul = styled.ul`
     margin: 0;
     list-style-type: none;
 
-    ${({ direction }) => direction.horizontal === DIR_LEFT
+    > li {
+        position: absolute;
+        transition transform .3s;
+    }
+
+    ${({ position }) => position.horizontal === POS_LEFT
         ? ` > li { left: 0; }`
         : ` > li { right: 0; }`
     }
 `;
 
 const Li = styled.li`
-    position: absolute;
-    transform: translateY(${({ offset }) => offset}px);
-    transition: transform .3s;
+    transform: translateY(${({offset}) => offset}px);
 
     > .bt-toast {
         opacity: 0;
@@ -26,7 +29,6 @@ const Li = styled.li`
     > .bt-toast.shown {
         opacity: 1;
         transform: scale(1);
-        transition: transform 0s, opacity .3s;
         transition-delay: .3s;
     }
 

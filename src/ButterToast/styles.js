@@ -1,8 +1,8 @@
-export const DIR_TOP = 'DIR_TOP';
-export const DIR_BOTTOM = 'DIR_BOTTOM';
-export const DIR_LEFT = 'DIR_LEFT';
-export const DIR_RIGHT = 'DIR_RIGHT';
-export const DIR_CENTER = 'DIR_CENTER';
+export const POS_TOP = 'POS_TOP';
+export const POS_BOTTOM = 'POS_BOTTOM';
+export const POS_LEFT = 'POS_LEFT';
+export const POS_RIGHT = 'POS_RIGHT';
+export const POS_CENTER = 'POS_CENTER';
 
 const styleRight = {
     right: 0
@@ -31,13 +31,13 @@ const styleBase = {
 };
 
 export default function styles({
-    vertical = DIR_TOP, horizontal = DIR_RIGHT
+    vertical = POS_TOP, horizontal = POS_RIGHT
 } = {}) {
 
     return Object.assign({}, styleBase,
-        vertical === DIR_BOTTOM ? styleBottom : styleTop,
-        horizontal === DIR_CENTER ? styleCenter : {},
-        horizontal === DIR_LEFT ? styleLeft : {},
-        horizontal === DIR_RIGHT ? styleRight : {}
+        vertical === POS_BOTTOM ? styleBottom : styleTop,
+        horizontal === POS_CENTER ? styleCenter : {},
+        horizontal === POS_LEFT ? styleLeft : {},
+        horizontal === POS_RIGHT ? styleRight : {}
     );
 }

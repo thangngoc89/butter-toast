@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
-import { DIR_RIGHT, DIR_TOP } from './styles';
+import { POS_RIGHT, POS_TOP } from './styles';
 import styles from './styles';
 import Tray from '../Tray';
 
@@ -15,7 +15,7 @@ class ButterToast extends Component {
         return window.dispatchEvent(toast);
     }
 
-    static unmount(props, _tray) {
+    static unmount(_tray) {
 
         if (_tray) {
             window.removeEventListener('ButterToast', _tray.onButterToast);
@@ -30,16 +30,6 @@ class ButterToast extends Component {
         delete this.root;
     }
 
-    constructor(props) {
-        super(props);
-
-        this.config = {};
-        this.theme = '';
-        if (this.config.theme) {
-            this.theme = ` bt-theme-${this.config.theme}`;
-        }
-    }
-
     componentDidMount() {
 
         if (this.props.renderInContext) {
@@ -47,26 +37,29 @@ class ButterToast extends Component {
         }
 
         const {
-            direction
+            position,
+            timeout,
+            spacing
         } = this.props;
 
         const className = `${this.className}${this.theme}`;
 
-        const style = styles({ vertical: direction.vertical, horizontal: direction.horizontal });
+        const style = styles({ vertical: position.vertical, horizontal: position.horizontal });
         this.root = document.createElement('aside');
         this.root.setAttribute('class', className);
         Object.assign(this.root.style, style);
         document.body.appendChild(this.root);
 
         ReactDOM.render(<Tray ref={this.createTrayRef}
-                direction={direction}
-                {...this.config} />,
+                spacing={spacing}
+                timeout={timeout}
+                position={position}/>,
             this.root);
     }
 
     componentWillUnmount() {
         if (!this.props.renderInContext) {
-            ButterToast.unmount(this.config, this._tray);
+            ButterToast.unmount(this._tray);
         }
     }
 
@@ -81,12 +74,20 @@ class ButterToast extends Component {
     }
 
     render() {
+
+        const {
+            renderInContext,
+            timeout
+        } = this.props;
+
         if (this.props.renderInContext) {
             const className = `${this.className}${this.theme}`;
 
             return (
                 <aside className={className}>
-                    <Tray ref={this.createTrayRef} {...this.config}/>
+                    <Tray ref={this.createTrayRef}
+                        spacing={spacing}
+                        timeout={timeout}/>
                 </aside>
             );
         } else {
@@ -100,10 +101,12 @@ ButterToast.propTypes = {
 };
 
 ButterToast.defaultProps = {
-    direction: {
-        vertical: DIR_TOP,
-        horizontal: DIR_RIGHT
-    }
+    position: {
+        vertical: POS_TOP,
+        horizontal: POS_RIGHT
+    },
+    timeout: 5000,
+    spacing: 10
 };
 
 export default ButterToast;
