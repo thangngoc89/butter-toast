@@ -16,12 +16,16 @@ class Toast extends Toggler {
         setTimeout(this.open);
     }
 
-    startTimeout() {
+    startTimeout = () => {
+        const timeout = this.remaining || this.props.toast.timeout;
         this.clearTimeout();
-        this.timeout = setTimeout(this.close, this.props.toast.timeout);
+        this.timeout = setTimeout(this.close, timeout);
+        this.ends = Date.now() + timeout;
+        delete this.remaining;
     }
 
-    clearTimeout() {
+    clearTimeout = () => {
+        this.remaining = this.ends - Date.now();
         clearTimeout(this.timeout);
     }
 
@@ -68,7 +72,7 @@ class Toast extends Toggler {
     }
 
     toggleContent({close}) {
-        const { toast } = this.props;
+        const { toast, pauseOnHover } = this.props;
         const { shown, removed } = this.state;
 
         const className = classNames('bt-toast', {
@@ -76,7 +80,11 @@ class Toast extends Toggler {
         });
 
         return (
-            <div ref={this.createRef} className={className} onClick={close}>
+            <div ref={this.createRef}
+                onMouseEnter={() => pauseOnHover && this.clearTimeout()}
+                onMouseLeave={() => pauseOnHover && this.startTimeout()}
+                className={className}
+                onClick={close}>
                 {toast.id} I am a toasty toast
             </div>
         );
@@ -86,5 +94,6 @@ class Toast extends Toggler {
 export default Toast;
 
 Toast.defaultProps = {
-    bindBodyClickListener: false
+    bindBodyClickListener: false,
+    pauseOnHover: true
 };

@@ -15,7 +15,7 @@ storiesOf('Examples/Popover', module)
     .add('Basic', () => (
         <div>
             <div>hello</div>
-            <ButterToast position={{vertical: 'POS_BOTTOM', horizontal: 'POS_LEFT'}} />
+            <ButterToast position={{vertical: 'POS_TOP', horizontal: 'POS_LEFT'}} />
         </div>
     ))
     .add('Basic1', () => (
