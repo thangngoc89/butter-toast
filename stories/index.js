@@ -1,13 +1,19 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import ButterToast from '../src';
+import ButterToast, { Cinnamon } from '../src';
+import Funnies from 'funnies';
 import './styles.scss';
+
+const funnies = new Funnies();
+
 
 setInterval(() => {
     if ('_btTrays' in window) {
         for (const tray in window._btTrays) {
             window._btTrays[tray].push({
-                content: () => <div>unsafe render</div>
+                content: (
+                    <Cinnamon.Crisp title="crisp-example" content={funnies.message()}/>
+                )
             });
         }
     }

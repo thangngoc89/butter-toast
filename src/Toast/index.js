@@ -1,6 +1,6 @@
 import React from 'react';
 import Toggler from '@fiverr/ui_toggle';
-import getRenderable from './lib/getRenderable';
+import { getRenderable } from '../lib';
 import classNames from 'classnames';
 
 class Toast extends Toggler {
