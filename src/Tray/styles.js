@@ -23,7 +23,7 @@ const Li = styled.li`
 
     > .bt-toast {
         opacity: 0;
-        transition: opacity .5s, transform .5s;
+        transition: opacity .2s;
     }
 
     > .bt-toast.shown {
@@ -34,6 +34,7 @@ const Li = styled.li`
 
     > .bt-toast.removed {
         transform: scale(.8);
+        transition: opacity .4s, transform .5s;
     }
 `;
 

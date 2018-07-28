@@ -99,8 +99,7 @@ class Toast extends Toggler {
             <div ref={this.createRef}
                 onMouseEnter={() => pauseOnHover && this.clearTimeout()}
                 onMouseLeave={() => pauseOnHover && this.startTimeout()}
-                className={className}
-                onClick={close}>
+                className={className}>
                 {getRenderable(toast.content, {
                     toastId: toast.id,
                     dismiss: this.close,

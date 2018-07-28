@@ -12,7 +12,7 @@ setInterval(() => {
         for (const tray in window._btTrays) {
             window._btTrays[tray].push({
                 content: (
-                    <Cinnamon.Crisp title="crisp-example" content={funnies.message()}/>
+                    <Cinnamon.Crisp title="crisp-example" content={funnies.message()} icon={<i className="fa fa-trash"/>}/>
                 )
             });
         }
@@ -23,7 +23,7 @@ storiesOf('Examples/Popover', module)
     .add('Basic', () => (
         <div>
             <div>hello</div>
-            <ButterToast position={{vertical: 'POS_TOP', horizontal: 'POS_LEFT'}} />
+            <ButterToast position={{vertical: 'POS_BOTTOM', horizontal: 'POS_LEFT'}} />
         </div>
     ))
     .add('Basic1', () => (

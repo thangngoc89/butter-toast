@@ -33,9 +33,9 @@ class Tray extends Component {
 
         this.setState((prevState) => {
             const nextState = Object.assign({}, prevState);
-            nextState.toasts = nextState.toasts.concat([{
+            nextState.toasts = [{
                 id, timeout, ...payload
-            }]);
+            }].concat(nextState.toasts);
             return nextState;
         });
     }
