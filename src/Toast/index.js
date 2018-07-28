@@ -1,5 +1,6 @@
 import React from 'react';
 import Toggler from '@fiverr/ui_toggle';
+import getRenderable from './lib/getRenderable';
 import classNames from 'classnames';
 
 class Toast extends Toggler {
@@ -17,16 +18,31 @@ class Toast extends Toggler {
     }
 
     startTimeout = () => {
-        const timeout = this.remaining || this.props.toast.timeout;
+        const { toast } = this.props;
+
+        if (toast.sticky) {
+            return;
+        }
+
+        const timeout = typeof this.remaining === 'number' ? this.remaining : toast.timeout;
         this.clearTimeout();
         this.timeout = setTimeout(this.close, timeout);
         this.ends = Date.now() + timeout;
-        delete this.remaining;
+        this.remaining = undefined;
     }
 
     clearTimeout = () => {
-        this.remaining = this.ends - Date.now();
+
+        if (this.props.toast.sticky) {
+            return;
+        }
+
+        this.remaining = this.calcRemaining();
         clearTimeout(this.timeout);
+    }
+
+    calcRemaining = () => {
+        return this.ends - Date.now();
     }
 
     togglerDidOpen() {
@@ -85,7 +101,11 @@ class Toast extends Toggler {
                 onMouseLeave={() => pauseOnHover && this.startTimeout()}
                 className={className}
                 onClick={close}>
-                {toast.id} I am a toasty toast
+                {getRenderable(toast.content, {
+                    toastId: toast.id,
+                    dismiss: this.close,
+                    calcRemaining: this.calcRemaining
+                })}
             </div>
         );
     }

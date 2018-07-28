@@ -6,7 +6,9 @@ import './styles.scss';
 setInterval(() => {
     if ('_btTrays' in window) {
         for (const tray in window._btTrays) {
-            window._btTrays[tray].push({});
+            window._btTrays[tray].push({
+                content: () => <div>unsafe render</div>
+            });
         }
     }
 }, 1500);
