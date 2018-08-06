@@ -1,13 +1,45 @@
 import styled from 'styled-components';
+import { rgba, setSaturation } from 'polished';
 import {
     $white,
     $grey_50,
     $grey_100,
     $grey_300,
     $grey_400,
-    $grey_600
+    $grey_600,
+    $red_600,
+    $orange_A200,
+    $indigo_600,
+    $green_600
 } from '../colors';
 
+export const SCHEME_RED = 'scheme-red';
+export const SCHEME_AMBER = 'scheme-amber';
+export const SCHEME_INDIGO = 'scheme-indigo';
+export const SCHEME_GREEN = 'scheme-green';
+
+const themeColor = (theme, alpha = 1) => {
+    let color;
+    switch (theme) {
+        case SCHEME_RED:
+            color = $red_600;
+            break;
+        case SCHEME_AMBER:
+            color = $orange_A200;
+            break;
+        case SCHEME_INDIGO:
+            color = $indigo_600;
+            break;
+        case SCHEME_GREEN:
+            color = $green_600;
+            break;
+        default:
+            color = $grey_600;
+            break;
+    }
+
+    return rgba(color, alpha);
+}
 
 const Div = styled.div`
     @keyframes showIcon {
@@ -22,8 +54,8 @@ const Div = styled.div`
     position: relative;
     background-color: ${$white};
     min-height: 50px;
-    width: ${({hasIcon}) => hasIcon ? '400' : '350' }px;
-    padding: 10px 45px 10px ${({hasIcon}) => hasIcon ? '60' : '10' }px;
+    width: ${({ hasIcon }) => hasIcon ? '400' : '350'}px;
+    padding: 10px 45px 10px ${({ hasIcon }) => hasIcon ? '60' : '10'}px;
     box-sizing: border-box;
     box-shadow: 0 3px 15px ${$grey_300};
     border-radius: 5px;
@@ -32,13 +64,13 @@ const Div = styled.div`
     z-index: 1;
 
     strong.title {
-        color: ${$grey_600};
-        padding-bottom: 5px;
+        color: ${({theme}) => themeColor(theme)};
         font-size: 15px;
     }
 
     div.content {
-        color: ${$grey_400};
+        padding-top: 5px;
+        color: ${({theme}) => setSaturation(.3, themeColor(theme, .5))};
     }
 
     button.btn-dismiss {
@@ -50,18 +82,18 @@ const Div = styled.div`
         text-align: center;
         text-decoration: none;
         font-size: 22px;
-        color: ${$grey_300};
+        color: ${({theme}) => themeColor(theme, .6)};
         transition: background-color .4s;
         border: none;
         outline: none;
         background: none;
 
         &:hover {
-            background-color: ${$grey_50};
+            background-color: ${({theme}) => themeColor(theme, .05)};
         }
 
         &:active {
-            background-color: ${$grey_100};
+            background-color: ${({theme}) => themeColor(theme, .1)};
         }
     }
 

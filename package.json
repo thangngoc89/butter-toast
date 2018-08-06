@@ -27,6 +27,7 @@
   "dependencies": {
     "@fiverr/ui_toggle": "^1.0.3",
     "classnames": "^2.2.6",
+    "polished": "^1.9.3",
     "styled-components": "^3.3.3"
   },
   "devDependencies": {
