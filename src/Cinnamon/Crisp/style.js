@@ -2,21 +2,22 @@ import styled from 'styled-components';
 import { rgba, setSaturation } from 'polished';
 import {
     $white,
-    $grey_50,
-    $grey_100,
     $grey_300,
     $grey_400,
     $grey_600,
     $red_600,
     $orange_A200,
     $indigo_600,
+    $blue_600,
     $green_600
 } from '../colors';
 
+export const SCHEME_GREY = 'scheme-grey';
 export const SCHEME_RED = 'scheme-red';
-export const SCHEME_AMBER = 'scheme-amber';
+export const SCHEME_ORANGE = 'scheme-orange';
 export const SCHEME_INDIGO = 'scheme-indigo';
 export const SCHEME_GREEN = 'scheme-green';
+export const SCHEME_BLUE = 'scheme-blue';
 
 const themeColor = (theme, alpha = 1) => {
     let color;
@@ -24,7 +25,7 @@ const themeColor = (theme, alpha = 1) => {
         case SCHEME_RED:
             color = $red_600;
             break;
-        case SCHEME_AMBER:
+        case SCHEME_ORANGE:
             color = $orange_A200;
             break;
         case SCHEME_INDIGO:
@@ -33,6 +34,10 @@ const themeColor = (theme, alpha = 1) => {
         case SCHEME_GREEN:
             color = $green_600;
             break;
+        case SCHEME_BLUE:
+            color = $blue_600;
+            break;
+        case SCHEME_GREY:
         default:
             color = $grey_600;
             break;
@@ -57,11 +62,15 @@ const Div = styled.div`
     width: ${({ hasIcon }) => hasIcon ? '400' : '350'}px;
     padding: 10px 45px 10px ${({ hasIcon }) => hasIcon ? '60' : '10'}px;
     box-sizing: border-box;
-    box-shadow: 0 3px 15px ${$grey_300};
+    box-shadow: 0 3px 20px ${$grey_300};
     border-radius: 5px;
     transition: box-shadow .3s;
     overflow: hidden;
     z-index: 1;
+
+    &:hover {
+        box-shadow: 0 3px 15px ${$grey_400};
+    }
 
     strong.title {
         color: ${({theme}) => themeColor(theme)};
@@ -70,7 +79,7 @@ const Div = styled.div`
 
     div.content {
         padding-top: 5px;
-        color: ${({theme}) => setSaturation(.3, themeColor(theme, .5))};
+        color: ${({theme}) => setSaturation(.2, themeColor(theme, .6))};
     }
 
     button.btn-dismiss {
@@ -87,6 +96,7 @@ const Div = styled.div`
         border: none;
         outline: none;
         background: none;
+        cursor: pointer;
 
         &:hover {
             background-color: ${({theme}) => themeColor(theme, .05)};

@@ -10,8 +10,9 @@ const interval = setInterval(() => {
     if ('_btTrays' in window) {
         for (const tray in window._btTrays) {
             window._btTrays[tray].push({
+                // sticky: true,
                 content: (
-                    <Cinnamon.Crisp theme="theme-cream" title="crisp-example" content={funnies.message()} />
+                    <Cinnamon.Slim theme="scheme-light" title="crisp-example" children={funnies.message()} />
                 )
             });
         }
@@ -26,7 +27,7 @@ storiesOf('Examples/Popover', module)
     .add('Basic', () => (
         <div>
             <div>hello</div>
-            <ButterToast position={{vertical: 'POS_TOP', horizontal: 'POS_RIGHT'}} />
+            <ButterToast position={{vertical: 'POS_TOP', horizontal: 'POS_LEFT'}} />
         </div>
     ))
     .add('Basic1', () => (

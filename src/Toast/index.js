@@ -88,7 +88,7 @@ class Toast extends Toggler {
     }
 
     toggleContent({close}) {
-        const { toast, pauseOnHover } = this.props;
+        const { toast, pauseOnHover, position } = this.props;
         const { shown, removed } = this.state;
 
         const className = classNames('bt-toast', {
@@ -103,7 +103,8 @@ class Toast extends Toggler {
                 {getRenderable(toast.content, {
                     toastId: toast.id,
                     dismiss: this.close,
-                    calcRemaining: this.calcRemaining
+                    calcRemaining: this.calcRemaining,
+                    position
                 })}
             </div>
         );

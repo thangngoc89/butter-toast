@@ -88,6 +88,7 @@ class Tray extends Component {
                     return <Li key={toast.id} offset={currentOffset}>
                                 <Toast pop={this.pop}
                                     setHeight={this.setHeight}
+                                    position={position}
                                     ref={(ref) => this.createToastRef(toast.id, ref)}
                                     toast={toast}/>
                             </Li>
