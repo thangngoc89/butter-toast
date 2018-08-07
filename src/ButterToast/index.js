@@ -77,7 +77,8 @@ class ButterToast extends Component {
 
         const {
             renderInContext,
-            timeout
+            timeout,
+            spacing
         } = this.props;
 
         if (this.props.renderInContext) {

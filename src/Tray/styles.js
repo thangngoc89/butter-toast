@@ -29,12 +29,12 @@ const Li = styled.li`
     > .bt-toast.shown {
         opacity: 1;
         transform: scale(1);
-        transition-delay: .3s;
+        transition-delay: .1s;
     }
 
     > .bt-toast.removed {
         transform: scale(.8);
-        transition: opacity .4s, transform .5s;
+        transition: opacity .5s, transform .6s;
     }
 `;
 
