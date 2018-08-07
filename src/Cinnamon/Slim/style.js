@@ -28,6 +28,7 @@ const Div = styled.div`
 
     > span {
         ${container}
+        ${({hasOnClick}) => 'cursor: pointer;' }
         text-align: 'center';
         ${({ theme }) => {
             return theme === SCHEME_DARK

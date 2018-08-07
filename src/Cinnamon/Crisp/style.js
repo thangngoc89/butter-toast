@@ -55,6 +55,7 @@ const Div = styled.div`
     }
 
     ${container}
+    ${({hasOnClick}) => 'cursor: pointer;' }
     background-color: ${$white};
     min-height: 50px;
     width: ${({ hasIcon }) => hasIcon ? '400' : '350'}px;
