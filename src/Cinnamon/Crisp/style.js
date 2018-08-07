@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { rgba, setSaturation } from 'polished';
+import { container } from '../sharedStyles';
 import {
     $white,
     $grey_300,
@@ -53,24 +54,12 @@ const Div = styled.div`
         100% { transform: scale(1); }
     }
 
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 11px;
-    line-height: 14px;
-    position: relative;
+    ${container}
     background-color: ${$white};
     min-height: 50px;
     width: ${({ hasIcon }) => hasIcon ? '400' : '350'}px;
     padding: 10px 45px 10px ${({ hasIcon }) => hasIcon ? '60' : '10'}px;
-    box-sizing: border-box;
-    box-shadow: 0 3px 20px ${$grey_300};
     border-radius: 5px;
-    transition: box-shadow .3s;
-    overflow: hidden;
-    z-index: 1;
-
-    &:hover {
-        box-shadow: 0 3px 15px ${$grey_400};
-    }
 
     strong.title {
         color: ${({theme}) => themeColor(theme)};
