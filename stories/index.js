@@ -12,7 +12,7 @@ const interval = setInterval(() => {
             window._btTrays[tray].push({
                 // sticky: true,
                 content: (
-                    <Cinnamon.Slim theme="scheme-light" title="crisp-example" children={funnies.message()} />
+                    <Cinnamon.Slim theme="scheme-dark" title="crisp-example" children={funnies.message()} />
                 )
             });
         }

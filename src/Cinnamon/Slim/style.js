@@ -33,17 +33,15 @@ const Div = styled.div`
         line-height: 14px;
         position: relative;
         ${({ theme }) => {
-            if (theme === SCHEME_DARK) {
-                return `
+            return theme === SCHEME_DARK
+                ? `
                     color: ${$grey_100};
                     background-color: ${$grey_800}
                 `
-            }
-
-            return `
-               color: ${$grey_800};
-                background-color: ${$grey_100}
-            `
+                : `
+                    color: ${$grey_800};
+                    background-color: ${$grey_100}
+                `
         }}
         padding: 5px 10px;
         box-sizing: border-box;
