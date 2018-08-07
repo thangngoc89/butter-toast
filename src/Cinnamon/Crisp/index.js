@@ -25,7 +25,7 @@ function Crisp({ dismissible, icon, title, content, dismiss, toastId, theme, onC
 export default Crisp;
 export { SCHEME_GREY, SCHEME_RED, SCHEME_ORANGE, SCHEME_INDIGO, SCHEME_GREEN, SCHEME_BLUE };
 
-Slim.Crisp = {
+Crisp.prototypes = {
     content: PropTypes.node,
     className: PropTypes.string,
     theme: PropTypes.oneOf([SCHEME_GREY, SCHEME_RED, SCHEME_ORANGE, SCHEME_INDIGO, SCHEME_GREEN, SCHEME_BLUE]),
@@ -35,7 +35,7 @@ Slim.Crisp = {
     dismissible: PropTypes.bool
 };
 
-Slim.defaultProps = {
+Crisp.defaultProps = {
     dismissible: true,
     theme: SCHEME_GREY,
     onDismiss: () => null
