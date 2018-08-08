@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { POS_LEFT, POS_BOTTOM } from '../ButterToast/styles';
+import { POS_LEFT } from '../ButterToast/styles';
 
 const Ul = styled.ul`
     position: relative;
@@ -13,10 +13,9 @@ const Ul = styled.ul`
     }
 
     ${({ position }) => position.horizontal === POS_LEFT
-        ? ` > li { left: 0; }`
-        : ` > li { right: 0; }`
-    }
-`;
+        ? ' > li { left: 0; }'
+        : ' > li { right: 0; }'}
+    `;
 
 const Li = styled.li`
     transform: translateY(${({offset}) => offset}px);

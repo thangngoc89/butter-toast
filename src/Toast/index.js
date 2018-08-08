@@ -41,9 +41,7 @@ class Toast extends Toggler {
         clearTimeout(this.timeout);
     }
 
-    calcRemaining = () => {
-        return this.ends - Date.now();
-    }
+    calcRemaining = () => this.ends - Date.now();
 
     togglerDidOpen() {
         const ref = this.toastRef;
@@ -87,7 +85,7 @@ class Toast extends Toggler {
         pop(toast.id);
     }
 
-    toggleContent({close}) {
+    toggleContent() {
         const { toast, pauseOnHover, position, ...props } = this.props;
         const { shown, removed } = this.state;
 

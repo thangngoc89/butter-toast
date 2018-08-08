@@ -1,10 +1,8 @@
 import styled from 'styled-components';
 import { rgba, setSaturation } from 'polished';
-import { container } from '../sharedStyles';
+import { Base } from '../sharedStyles';
 import {
     $white,
-    $grey_300,
-    $grey_400,
     $grey_600,
     $red_600,
     $orange_A200,
@@ -45,17 +43,16 @@ const themeColor = (theme, alpha = 1) => {
     }
 
     return rgba(color, alpha);
-}
+};
 
-const Div = styled.div`
+const Div = styled(Base)`
     @keyframes showIcon {
         0% { transform: scale(.6); }
         60% { transform: scale(1.1); }
         100% { transform: scale(1); }
     }
 
-    ${container}
-    ${({hasOnClick}) => 'cursor: pointer;' }
+    ${({ hasOnClick }) => hasOnClick ? 'cursor: pointer;' : ''}
     background-color: ${$white};
     min-height: 50px;
     width: ${({ hasIcon }) => hasIcon ? '400' : '350'}px;
@@ -63,13 +60,13 @@ const Div = styled.div`
     border-radius: 5px;
 
     strong.title {
-        color: ${({theme}) => themeColor(theme)};
+        color: ${({ theme }) => themeColor(theme)};
         font-size: 15px;
     }
 
     div.content {
         padding-top: 5px;
-        color: ${({theme}) => setSaturation(.2, themeColor(theme, .6))};
+        color: ${({ theme }) => setSaturation(0.2, themeColor(theme, 0.6))};
     }
 
     button.btn-dismiss {
@@ -81,7 +78,7 @@ const Div = styled.div`
         text-align: center;
         text-decoration: none;
         font-size: 22px;
-        color: ${({theme}) => themeColor(theme, .6)};
+        color: ${({ theme }) => themeColor(theme, 0.6)};
         transition: background-color .4s;
         border: none;
         outline: none;
@@ -89,11 +86,11 @@ const Div = styled.div`
         cursor: pointer;
 
         &:hover {
-            background-color: ${({theme}) => themeColor(theme, .05)};
+            background-color: ${({ theme }) => themeColor(theme, 0.05)};
         }
 
         &:active {
-            background-color: ${({theme}) => themeColor(theme, .1)};
+            background-color: ${({ theme }) => themeColor(theme, 0.1)};
         }
     }
 
@@ -110,6 +107,6 @@ const Div = styled.div`
         animation: showIcon .5s ease .3s forwards;
     }
 
-`
+`;
 
 export default Div;

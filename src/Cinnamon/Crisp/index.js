@@ -1,14 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Div, { SCHEME_GREY, SCHEME_RED, SCHEME_ORANGE, SCHEME_INDIGO, SCHEME_GREEN, SCHEME_BLUE } from './style';
-import { getRenderable } from '../../lib'
+import { getRenderable } from '../../lib';
 
 function Crisp({ dismissible, icon, title, content, dismiss, toastId, theme, onClick, onDismiss }) {
 
     const handleDismiss = (e) => {
         dismiss();
         onDismiss(e, { toastId });
-    }
+    };
 
     return (
         <Div hasIcon={!!icon} theme={theme} hasOnClick={!!onClick}>

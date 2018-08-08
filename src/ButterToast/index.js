@@ -15,21 +15,6 @@ class ButterToast extends Component {
         return window.dispatchEvent(toast);
     }
 
-    static unmount(_tray) {
-
-        if (_tray) {
-            window.removeEventListener('ButterToast', _tray.onButterToast);
-        }
-
-        if (!this.root) {
-            return;
-        }
-
-        ReactDOM.unmountComponentAtNode(this.root);
-        this.root.parentNode.removeChild(this.root);
-        delete this.root;
-    }
-
     componentDidMount() {
 
         if (this.props.renderInContext) {
@@ -58,9 +43,13 @@ class ButterToast extends Component {
     }
 
     componentWillUnmount() {
-        if (!this.props.renderInContext) {
-            ButterToast.unmount(this._tray);
+        if (!this.root) {
+            return;
         }
+
+        ReactDOM.unmountComponentAtNode(this.root);
+        this.root.parentNode.removeChild(this.root);
+        delete this.root;
     }
 
     createTrayRef = (ref) => {

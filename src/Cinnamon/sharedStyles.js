@@ -1,9 +1,10 @@
+import styled from 'styled-components';
 import {
     $grey_300,
     $grey_400
 } from './colors';
 
-const container = `
+const Base = styled.div`
     font-family: Arial, Helvetica, sans-serif;
     display: inline-block;
     font-size: 11px;
@@ -18,7 +19,8 @@ const container = `
     &:hover {
         box-shadow: 0 3px 20px ${$grey_400};
     }
-`
+`;
+
 export {
-    container
+    Base
 };

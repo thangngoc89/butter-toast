@@ -6,12 +6,11 @@ import Toast from '../Toast';
 
 class Tray extends Component {
 
-    id = generateId('tray')
-
     state = {
         toasts: []
     }
 
+    id = generateId('tray')
     toasts = {}
 
     createToastRef = (id, ref) => {
@@ -72,7 +71,7 @@ class Tray extends Component {
 
         return (
             <Ul position={position}>
-                {toasts.map((toast, index) => {
+                {toasts.map((toast) => {
                     if (!toast) { return null; }
 
                     const height = toast.height || 0;
@@ -85,13 +84,15 @@ class Tray extends Component {
                         currentOffset = -currentOffset - height;
                     }
 
-                    return <Li key={toast.id} offset={currentOffset}>
-                                <Toast pop={this.pop}
-                                    setHeight={this.setHeight}
-                                    position={position}
-                                    ref={(ref) => this.createToastRef(toast.id, ref)}
-                                    toast={toast}/>
-                            </Li>
+                    return (
+                        <Li key={toast.id} offset={currentOffset}>
+                            <Toast pop={this.pop}
+                                setHeight={this.setHeight}
+                                position={position}
+                                ref={(ref) => this.createToastRef(toast.id, ref)}
+                                toast={toast}/>
+                        </Li>
+                    );
                 })}
             </Ul>
         );

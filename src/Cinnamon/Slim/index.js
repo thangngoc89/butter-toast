@@ -1,18 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Div, { SCHEME_DARK, SCHEME_LIGHT } from './style';
-import { getRenderable } from '../../lib'
+import { Wrapper, Content, SCHEME_DARK, SCHEME_LIGHT } from './style';
+import { getRenderable } from '../../lib';
 
 function Slim({ children, content, className, theme, position = {}, toastId, dismiss, onClick }) {
-
-    if (!children || content) {
+    if (!children && !content) {
         return null;
     }
-
     return (
-        <Div className={className} theme={theme} horizontal={position.horizontal} hasOnClick={!!onClick}>
-            <span onClick={(e) => onClick && onClick(e, {toastId, dismiss})}>{getRenderable(content || children)}</span>
-        </Div>
+        <Wrapper className={className} theme={theme} horizontal={position.horizontal} hasOnClick={!!onClick}>
+            <Content onClick={(e) => onClick && onClick(e, {toastId, dismiss})}>{getRenderable(content || children)}</Content>
+        </Wrapper>
     );
 }
 
