@@ -4,44 +4,59 @@ import ButterToast, { Cinnamon } from '../src';
 import Funnies from 'funnies';
 import './styles.scss';
 
+const intervals = [];
+
 const funnies = new Funnies();
-function start(style) {
-    let count = 0;
-    const interval = setInterval(() => {
+function start(kind) {
+    intervals.forEach(clearInterval);
+    const fire = () => {
         if ('_btTrays' in window) {
             for (const tray in window._btTrays) {
-                window._btTrays[tray].push({
-
-                    // sticky: true,
-                    content: (
-                        style === 'slim'
-                            ? <Cinnamon.Slim theme="scheme-dark" content={funnies.message()}/>
-                            : <Cinnamon.Crisp theme="scheme-red" title="crisp-example" content={funnies.message()}/>
-                    )
-                });
+                if (kind === 'slim') {
+                    window._btTrays[tray].push({
+                        content: <Cinnamon.Slim scheme="scheme-dark" content={funnies.message()} />
+                    });
+                }
+                if (kind === 'crunch') {
+                    window._btTrays[tray].push({
+                        content: <Cinnamon.Crunch scheme="scheme-blue" title="crisp-example" content={funnies.message()} />
+                    });
+                }
+                if (kind === 'crisp') {
+                    window._btTrays[tray].push({
+                        content: <Cinnamon.Crisp scheme="scheme-blue" title="crisp-example" content={funnies.message()} />
+                    });
+                }
             }
         }
-        if (count > 5) {
-            clearInterval(interval);
-        }
-        count++;
-    }, 1000);
+    };
+    setTimeout(fire);
+    const interval = setInterval(fire, 2000);
+    intervals.push(interval);
 }
 
 storiesOf('Kind :: Crisp', module)
-    .add('Basic', () => {
-        start();
+    .add('crisp', () => {
+        start('crisp');
         return (
             <div>
-                <ButterToast position={{ vertical: 'POS_TOP', horizontal: 'POS_LEFT' }} spacing={5}/>
+                <ButterToast position={{ vertical: 'POS_TOP', horizontal: 'POS_CENTER' }}/>
             </div>
         );
     })
-    .add('Basic 1', () => {
+    .add('crunch', () => {
+        start('crunch');
+        return (
+            <div>
+                <ButterToast position={{ vertical: 'POS_TOP', horizontal: 'POS_LEFT' }}/>
+            </div>
+        );
+    })
+    .add('slim', () => {
         start('slim');
         return (
             <div>
-                <ButterToast position={{ vertical: 'POS_BOTTOM', horizontal: 'POS_LEFT' }} spacing={5}/>
+                <ButterToast position={{ vertical: 'POS_BOTTOM', horizontal: 'POS_CENTER' }} spacing={5}/>
             </div>
         );
     });

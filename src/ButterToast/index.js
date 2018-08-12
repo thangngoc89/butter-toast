@@ -24,14 +24,13 @@ class ButterToast extends Component {
         const {
             position,
             timeout,
-            spacing
+            spacing,
+            className
         } = this.props;
-
-        const className = `${this.className}${this.theme}`;
 
         const style = styles({ vertical: position.vertical, horizontal: position.horizontal });
         this.root = document.createElement('aside');
-        this.root.setAttribute('class', className);
+        this.root.setAttribute('class', className ? className : '');
         Object.assign(this.root.style, style);
         document.body.appendChild(this.root);
 
@@ -47,6 +46,7 @@ class ButterToast extends Component {
             return;
         }
 
+        delete window._btTrays[this.id];
         ReactDOM.unmountComponentAtNode(this.root);
         this.root.parentNode.removeChild(this.root);
         delete this.root;
@@ -59,6 +59,8 @@ class ButterToast extends Component {
             return;
         }
 
+        this.id = ref.id;
+
         window._btTrays[ref.id] = ref;
     }
 
@@ -67,11 +69,11 @@ class ButterToast extends Component {
         const {
             renderInContext,
             timeout,
-            spacing
+            spacing,
+            className
         } = this.props;
 
         if (this.props.renderInContext) {
-            const className = `${this.className}${this.theme}`;
 
             return (
                 <aside className={className}>
@@ -87,7 +89,8 @@ class ButterToast extends Component {
 }
 
 ButterToast.propTypes = {
-    renderInContext: PropTypes.bool
+    renderInContext: PropTypes.bool,
+    className: PropTypes.string
 };
 
 ButterToast.defaultProps = {
@@ -95,7 +98,7 @@ ButterToast.defaultProps = {
         vertical: POS_TOP,
         horizontal: POS_RIGHT
     },
-    timeout: 5000,
+    timeout: 6000,
     spacing: 10
 };
 

@@ -14,7 +14,6 @@ const styleLeft = {
 
 const styleCenter = {
     left: '50%',
-    transform: 'translateX(-50%)'
 };
 
 const styleBottom = {

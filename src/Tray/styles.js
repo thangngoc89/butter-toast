@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { POS_LEFT } from '../ButterToast/styles';
+import { POS_LEFT, POS_BOTTOM, POS_RIGHT, POS_CENTER } from '../ButterToast/styles';
 
 const Ul = styled.ul`
     position: relative;
@@ -10,31 +10,37 @@ const Ul = styled.ul`
     > li {
         position: absolute;
         transition transform .3s;
-    }
 
-    ${({ position }) => position.horizontal === POS_LEFT
-        ? ' > li { left: 0; }'
-        : ' > li { right: 0; }'}
-    `;
+        > .bt-toast {
+            opacity: 0;
+            transition: opacity .2s;
+        }
+
+        > .bt-toast.shown {
+            opacity: 1;
+            transform: scale(1);
+            transition-delay: .1s;
+        }
+
+        > .bt-toast.removed {
+            transform: scale(.8);
+            transition: opacity .5s, transform .6s;
+        }
+    }
+`;
 
 const Li = styled.li`
-    transform: translateY(${({offset}) => offset}px);
-
-    > .bt-toast {
-        opacity: 0;
-        transition: opacity .2s;
-    }
-
-    > .bt-toast.shown {
-        opacity: 1;
-        transform: scale(1);
-        transition-delay: .1s;
-    }
-
-    > .bt-toast.removed {
-        transform: scale(.8);
-        transition: opacity .5s, transform .6s;
-    }
+    ${({ position, spacing, offset }) => {
+        const translateY = `translateY(${offset}px)`;
+        switch (position.horizontal) {
+            case POS_RIGHT:
+                return `right: ${spacing}px; transform: ${translateY}`;
+            case POS_CENTER:
+                return `transform: translateX(-50%) ${translateY};`;
+            default:
+                return `left: ${spacing}px; transform: ${translateY}`;
+        }
+    }}
 `;
 
 export {

@@ -70,7 +70,7 @@ class Tray extends Component {
         let offset = 0;
 
         return (
-            <Ul position={position}>
+            <Ul>
                 {toasts.map((toast) => {
                     if (!toast) { return null; }
 
@@ -85,7 +85,7 @@ class Tray extends Component {
                     }
 
                     return (
-                        <Li key={toast.id} offset={currentOffset}>
+                        <Li key={toast.id} offset={currentOffset} spacing={spacing} position={position}>
                             <Toast pop={this.pop}
                                 setHeight={this.setHeight}
                                 position={position}

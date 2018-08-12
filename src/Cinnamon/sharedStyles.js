@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import {
     $grey_300,
-    $grey_400
+    $grey_500
 } from './colors';
 
 const Base = styled.div`
@@ -17,7 +17,7 @@ const Base = styled.div`
     z-index: 1;
 
     &:hover {
-        box-shadow: 0 3px 20px ${$grey_400};
+        box-shadow: 0 3px 20px ${$grey_500};
     }
 `;
 

@@ -3,18 +3,16 @@ import { rgba, setSaturation } from 'polished';
 import { Base } from '../sharedStyles';
 import {
     $white,
-    $grey_600,
-    $red_600,
-    $orange_A200,
-    $indigo_600,
-    $blue_600,
+    $grey_800,
+    $red_700,
+    $orange_800,
+    $blue_800,
     $green_600
 } from '../colors';
 
 export const SCHEME_GREY = 'scheme-grey';
 export const SCHEME_RED = 'scheme-red';
 export const SCHEME_ORANGE = 'scheme-orange';
-export const SCHEME_PURPLE = 'scheme-purple';
 export const SCHEME_GREEN = 'scheme-green';
 export const SCHEME_BLUE = 'scheme-blue';
 
@@ -22,23 +20,20 @@ const schemeColor = (scheme, alpha = 1) => {
     let color;
     switch (scheme) {
         case SCHEME_RED:
-            color = $red_600;
+            color = $red_700;
             break;
         case SCHEME_ORANGE:
-            color = $orange_A200;
-            break;
-        case SCHEME_PURPLE:
-            color = $purple_600;
+            color = $orange_800;
             break;
         case SCHEME_GREEN:
             color = $green_600;
             break;
         case SCHEME_BLUE:
-            color = $blue_600;
+            color = $blue_800;
             break;
         case SCHEME_GREY:
         default:
-            color = $grey_600;
+            color = $grey_800;
             break;
     }
 
@@ -53,60 +48,44 @@ const Div = styled(Base)`
     }
 
     ${({ hasOnClick }) => hasOnClick ? 'cursor: pointer;' : ''}
-    background-color: ${$white};
+    background-color: ${({ scheme }) => schemeColor(scheme)};
     min-height: 50px;
-    width: ${({ hasIcon }) => hasIcon ? '400' : '350'}px;
-    padding: 10px 45px 10px ${({ hasIcon }) => hasIcon ? '60' : '10'}px;
-    border-radius: 5px;
+    width: 300px;
+    padding: 10px 45px 10px 10px;
 
     strong.title {
-        color: ${({ scheme }) => schemeColor(scheme)};
+        color: ${$white};
         font-size: 15px;
     }
 
     div.content {
         padding-top: 5px;
-        color: ${({ scheme }) => setSaturation(0.2, schemeColor(scheme, 0.6))};
+        color: ${$white};
     }
 
     button.btn-dismiss {
         position: absolute;
         right: 0;
         top: 0;
-        bottom: 0;
-        width: 40px;
+        padding: 5px 10px;
         text-align: center;
         text-decoration: none;
-        font-size: 22px;
-        color: ${({ scheme }) => schemeColor(scheme, 0.6)};
-        transition: background-color .4s;
+        font-size: 14px;
+        color: ${rgba($white, .5)};
+        transition: color .4s;
         border: none;
         outline: none;
         background: none;
         cursor: pointer;
 
         &:hover {
-            background-color: ${({ scheme }) => schemeColor(scheme, 0.05)};
+            color: ${rgba($white, .8)};
         }
 
         &:active {
-            background-color: ${({ scheme }) => schemeColor(scheme, 0.1)};
+            color: ${rgba($white, 1)};
         }
     }
-
-    > .icon {
-        top: 0;
-        bottom: 0;
-        left: 0;
-        width: 50px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        position: absolute;
-        animation: showIcon .5s ease .3s forwards;
-    }
-
 `;
 
 export default Div;
