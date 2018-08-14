@@ -13,15 +13,15 @@ const styleLeft = {
 };
 
 const styleCenter = {
-    left: '50%',
+    left: '50%'
 };
 
 const styleBottom = {
-    bottom: 0
+    bottom: '10px'
 };
 
 const styleTop = {
-    top: 0
+    top: '10px'
 };
 
 const styleBase = {
@@ -30,11 +30,11 @@ const styleBase = {
 };
 
 export default function styles({
-    vertical = POS_TOP, horizontal = POS_RIGHT
+    vertical = POS_TOP, horizontal = POS_RIGHT, spacing = 0
 } = {}) {
 
     return Object.assign({}, styleBase,
-        vertical === POS_BOTTOM ? styleBottom : styleTop,
+        vertical === POS_BOTTOM ? {bottom: `${spacing}px`} : {top: `${spacing}px`},
         horizontal === POS_CENTER ? styleCenter : {},
         horizontal === POS_LEFT ? styleLeft : {},
         horizontal === POS_RIGHT ? styleRight : {}

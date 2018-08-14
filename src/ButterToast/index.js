@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
-import { POS_RIGHT, POS_TOP } from './styles';
-import styles from './styles';
+import styles, { POS_RIGHT, POS_TOP } from './styles';
 import Tray from '../Tray';
 
 class ButterToast extends Component {
@@ -28,17 +27,17 @@ class ButterToast extends Component {
             className
         } = this.props;
 
-        const style = styles({ vertical: position.vertical, horizontal: position.horizontal });
+        const style = styles({ vertical: position.vertical, horizontal: position.horizontal, spacing });
         this.root = document.createElement('aside');
         this.root.setAttribute('class', className ? className : '');
         Object.assign(this.root.style, style);
         document.body.appendChild(this.root);
 
         ReactDOM.render(<Tray ref={this.createTrayRef}
-                spacing={spacing}
-                timeout={timeout}
-                position={position}/>,
-            this.root);
+            spacing={spacing}
+            timeout={timeout}
+            position={position}/>,
+        this.root);
     }
 
     componentWillUnmount() {
@@ -73,7 +72,7 @@ class ButterToast extends Component {
             className
         } = this.props;
 
-        if (this.props.renderInContext) {
+        if (renderInContext) {
 
             return (
                 <aside className={className}>

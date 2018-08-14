@@ -28,7 +28,7 @@ const schemeColor = (scheme, alpha = 1) => {
             color = $orange_A200;
             break;
         case SCHEME_PURPLE:
-            color = $purple_600;
+            color = $indigo_600;
             break;
         case SCHEME_GREEN:
             color = $green_600;

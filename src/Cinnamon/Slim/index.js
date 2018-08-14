@@ -7,9 +7,11 @@ function Slim({ children, content, className, scheme, position = {}, toastId, di
     if (!children && !content) {
         return null;
     }
+
     return (
-        <Wrapper className={className} scheme={scheme} horizontal={position.horizontal} hasOnClick={!!onClick}>
-            <Content onClick={(e) => onClick && onClick(e, {toastId, dismiss})}>{getRenderable(content || children)}</Content>
+        <Wrapper className={className} horizontal={position.horizontal} hasOnClick={!!onClick}>
+            <Content onClick={(e) => onClick && onClick(e, {toastId, dismiss})}
+                scheme={scheme}>{getRenderable(content || children)}</Content>
         </Wrapper>
     );
 }

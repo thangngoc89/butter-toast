@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { POS_LEFT, POS_BOTTOM, POS_RIGHT, POS_CENTER } from '../ButterToast/styles';
+import { POS_RIGHT, POS_CENTER } from '../ButterToast/styles';
 
 const Ul = styled.ul`
     position: relative;
@@ -13,7 +13,7 @@ const Ul = styled.ul`
 
         > .bt-toast {
             opacity: 0;
-            transition: opacity .2s;
+            transition: opacity .5s;
         }
 
         > .bt-toast.shown {
