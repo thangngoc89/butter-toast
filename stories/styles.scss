@@ -2,7 +2,15 @@
 
 #root {
     height: 100%;
-    display: block;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    > div > button {
+        padding: 5px 10px;
+        outline: none;
+    }
 }
 
 html, body {
@@ -17,3 +25,4 @@ html, body {
 .fa {
     font-size: 25px;
 }
+

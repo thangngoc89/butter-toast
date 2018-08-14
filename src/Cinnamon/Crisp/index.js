@@ -3,12 +3,7 @@ import PropTypes from 'prop-types';
 import Div, { SCHEME_GREY, SCHEME_RED, SCHEME_ORANGE, SCHEME_PURPLE, SCHEME_GREEN, SCHEME_BLUE } from './style';
 import { getRenderable } from '../../lib';
 
-function Crisp({ dismissible, icon, title, content, dismiss, toastId, scheme, onClick, onDismiss }) {
-
-    const handleDismiss = (e) => {
-        dismiss();
-        onDismiss(e, { toastId });
-    };
+function Crisp({ dismissible, icon, title, content, dismiss, toastId, scheme, onClick }) {
 
     return (
         <Div hasIcon={!!icon} scheme={scheme} hasOnClick={!!onClick}>
@@ -17,7 +12,7 @@ function Crisp({ dismissible, icon, title, content, dismiss, toastId, scheme, on
                 { title && <strong className="title">{getRenderable(title)}</strong> }
                 {content && <div className="content">{getRenderable(content)}</div>}
             </span>
-            {dismissible && <button onClick={handleDismiss} className="btn-dismiss">&times;</button>}
+            {dismissible && <button onClick={dismiss} className="btn-dismiss">&times;</button>}
         </Div>
     );
 }
@@ -38,6 +33,5 @@ Crisp.prototypes = {
 
 Crisp.defaultProps = {
     dismissible: true,
-    scheme: SCHEME_GREY,
-    onDismiss: () => null
+    scheme: SCHEME_GREY
 };

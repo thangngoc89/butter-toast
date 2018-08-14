@@ -18,7 +18,7 @@ function start({ kind, sticky = false, scheme } = {}) {
     const fire = () => {
         counter += 1;
 
-        if (sticky && counter > 5) {
+        if (sticky && counter > 4) {
             clearInterval(interval);
         }
 
@@ -59,12 +59,19 @@ function start({ kind, sticky = false, scheme } = {}) {
     intervals.push(interval);
 }
 
+const dismissAll = () => {
+    window.dispatchEvent(new CustomEvent('ButterToast', {detail:{
+	    dismiss: 'all'
+    }}));
+}
+
 storiesOf('Kind::Crisp', module)
     .add('Red - top/center', () => {
         start({ kind: 'crisp', scheme: 'red' });
         return (
             <div>
                 <ButterToast position={{ vertical: POS_TOP, horizontal: POS_CENTER }} />
+                <button onClick={dismissAll}>Dismiss All</button>
             </div>
         );
     })
@@ -73,6 +80,7 @@ storiesOf('Kind::Crisp', module)
         return (
             <div>
                 <ButterToast position={{ vertical: POS_BOTTOM, horizontal: POS_CENTER }} />
+                <button onClick={dismissAll}>Dismiss All</button>
             </div>
         );
     })
@@ -81,6 +89,7 @@ storiesOf('Kind::Crisp', module)
         return (
             <div>
                 <ButterToast position={{ vertical: POS_TOP, horizontal: POS_LEFT }} />
+                <button onClick={dismissAll}>Dismiss All</button>
             </div>
         );
     })
@@ -89,6 +98,7 @@ storiesOf('Kind::Crisp', module)
         return (
             <div>
                 <ButterToast position={{ vertical: POS_BOTTOM, horizontal: POS_LEFT }} />
+                <button onClick={dismissAll}>Dismiss All</button>
             </div>
         );
     })
@@ -97,6 +107,7 @@ storiesOf('Kind::Crisp', module)
         return (
             <div>
                 <ButterToast position={{ vertical: POS_TOP, horizontal: POS_RIGHT }} />
+                <button onClick={dismissAll}>Dismiss All</button>
             </div>
         );
     })
@@ -105,6 +116,7 @@ storiesOf('Kind::Crisp', module)
         return (
             <div>
                 <ButterToast position={{ vertical: POS_BOTTOM, horizontal: POS_RIGHT }} />
+                <button onClick={dismissAll}>Dismiss All</button>
             </div>
         );
     })
@@ -113,6 +125,7 @@ storiesOf('Kind::Crisp', module)
         return (
             <div>
                 <ButterToast position={{ vertical: POS_TOP, horizontal: POS_CENTER }} />
+                <button onClick={dismissAll}>Dismiss All</button>
             </div>
         );
     })
@@ -121,6 +134,7 @@ storiesOf('Kind::Crisp', module)
         return (
             <div>
                 <ButterToast position={{ vertical: POS_TOP, horizontal: POS_CENTER }} />
+                <button onClick={dismissAll}>Dismiss All</button>
             </div>
         );
     })
@@ -129,6 +143,7 @@ storiesOf('Kind::Crisp', module)
         return (
             <div>
                 <ButterToast position={{ vertical: POS_TOP, horizontal: POS_CENTER }} />
+                <button onClick={dismissAll}>Dismiss All</button>
             </div>
         );
     })
@@ -137,6 +152,7 @@ storiesOf('Kind::Crisp', module)
         return (
             <div>
                 <ButterToast position={{ vertical: POS_TOP, horizontal: POS_CENTER }} />
+                <button onClick={dismissAll}>Dismiss All</button>
             </div>
         );
     })
@@ -145,6 +161,7 @@ storiesOf('Kind::Crisp', module)
         return (
             <div>
                 <ButterToast position={{ vertical: POS_TOP, horizontal: POS_CENTER }} />
+                <button onClick={dismissAll}>Dismiss All</button>
             </div>
         );
     })
@@ -153,6 +170,7 @@ storiesOf('Kind::Crisp', module)
         return (
             <div>
                 <ButterToast position={{ vertical: POS_TOP, horizontal: POS_CENTER }} />
+                <button onClick={dismissAll}>Dismiss All</button>
             </div>
         );
     });
@@ -163,6 +181,7 @@ storiesOf('Kind::crunch', module)
         return (
             <div>
                 <ButterToast position={{ vertical: POS_TOP, horizontal: POS_CENTER }} />
+                <button onClick={dismissAll}>Dismiss All</button>
             </div>
         );
     })
@@ -171,6 +190,7 @@ storiesOf('Kind::crunch', module)
         return (
             <div>
                 <ButterToast position={{ vertical: POS_BOTTOM, horizontal: POS_CENTER }} />
+                <button onClick={dismissAll}>Dismiss All</button>
             </div>
         );
     })
@@ -179,6 +199,7 @@ storiesOf('Kind::crunch', module)
         return (
             <div>
                 <ButterToast position={{ vertical: POS_TOP, horizontal: POS_LEFT }} />
+                <button onClick={dismissAll}>Dismiss All</button>
             </div>
         );
     })
@@ -187,6 +208,7 @@ storiesOf('Kind::crunch', module)
         return (
             <div>
                 <ButterToast position={{ vertical: POS_BOTTOM, horizontal: POS_LEFT }} />
+                <button onClick={dismissAll}>Dismiss All</button>
             </div>
         );
     })
@@ -195,6 +217,7 @@ storiesOf('Kind::crunch', module)
         return (
             <div>
                 <ButterToast position={{ vertical: POS_TOP, horizontal: POS_RIGHT }} />
+                <button onClick={dismissAll}>Dismiss All</button>
             </div>
         );
     })
@@ -203,6 +226,7 @@ storiesOf('Kind::crunch', module)
         return (
             <div>
                 <ButterToast position={{ vertical: POS_BOTTOM, horizontal: POS_RIGHT }} />
+                <button onClick={dismissAll}>Dismiss All</button>
             </div>
         );
     })
@@ -211,6 +235,7 @@ storiesOf('Kind::crunch', module)
         return (
             <div>
                 <ButterToast position={{ vertical: POS_TOP, horizontal: POS_CENTER }} />
+                <button onClick={dismissAll}>Dismiss All</button>
             </div>
         );
     })
@@ -219,6 +244,7 @@ storiesOf('Kind::crunch', module)
         return (
             <div>
                 <ButterToast position={{ vertical: POS_TOP, horizontal: POS_CENTER }} />
+                <button onClick={dismissAll}>Dismiss All</button>
             </div>
         );
     })
@@ -227,6 +253,7 @@ storiesOf('Kind::crunch', module)
         return (
             <div>
                 <ButterToast position={{ vertical: POS_TOP, horizontal: POS_CENTER }} />
+                <button onClick={dismissAll}>Dismiss All</button>
             </div>
         );
     })
@@ -235,6 +262,7 @@ storiesOf('Kind::crunch', module)
         return (
             <div>
                 <ButterToast position={{ vertical: POS_TOP, horizontal: POS_CENTER }} />
+                <button onClick={dismissAll}>Dismiss All</button>
             </div>
         );
     })
@@ -243,6 +271,7 @@ storiesOf('Kind::crunch', module)
         return (
             <div>
                 <ButterToast position={{ vertical: POS_TOP, horizontal: POS_CENTER }} />
+                <button onClick={dismissAll}>Dismiss All</button>
             </div>
         );
     });
@@ -253,6 +282,7 @@ storiesOf('Kind::Slim', module)
         return (
             <div>
                 <ButterToast position={{ vertical: POS_TOP, horizontal: POS_CENTER }} />
+                <button onClick={dismissAll}>Dismiss All</button>
             </div>
         );
     })
@@ -261,6 +291,7 @@ storiesOf('Kind::Slim', module)
         return (
             <div>
                 <ButterToast position={{ vertical: POS_BOTTOM, horizontal: POS_CENTER }} />
+                <button onClick={dismissAll}>Dismiss All</button>
             </div>
         );
     })
@@ -269,6 +300,7 @@ storiesOf('Kind::Slim', module)
         return (
             <div>
                 <ButterToast position={{ vertical: POS_TOP, horizontal: POS_LEFT }} />
+                <button onClick={dismissAll}>Dismiss All</button>
             </div>
         );
     })
@@ -277,6 +309,7 @@ storiesOf('Kind::Slim', module)
         return (
             <div>
                 <ButterToast position={{ vertical: POS_BOTTOM, horizontal: POS_LEFT }} />
+                <button onClick={dismissAll}>Dismiss All</button>
             </div>
         );
     })
@@ -285,6 +318,7 @@ storiesOf('Kind::Slim', module)
         return (
             <div>
                 <ButterToast position={{ vertical: POS_TOP, horizontal: POS_RIGHT }} />
+                <button onClick={dismissAll}>Dismiss All</button>
             </div>
         );
     })
@@ -293,6 +327,7 @@ storiesOf('Kind::Slim', module)
         return (
             <div>
                 <ButterToast position={{ vertical: POS_BOTTOM, horizontal: POS_RIGHT }} />
+                <button onClick={dismissAll}>Dismiss All</button>
             </div>
         );
     })
@@ -301,6 +336,7 @@ storiesOf('Kind::Slim', module)
         return (
             <div>
                 <ButterToast position={{ vertical: POS_TOP, horizontal: POS_CENTER }} />
+                <button onClick={dismissAll}>Dismiss All</button>
             </div>
         );
     })
@@ -309,6 +345,7 @@ storiesOf('Kind::Slim', module)
         return (
             <div>
                 <ButterToast position={{ vertical: POS_TOP, horizontal: POS_CENTER }} />
+                <button onClick={dismissAll}>Dismiss All</button>
             </div>
         );
     });

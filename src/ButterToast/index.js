@@ -3,16 +3,25 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import styles, { POS_RIGHT, POS_TOP } from './styles';
 import Tray from '../Tray';
+export const CUSTOM_EVENT_NAME = 'ButterToast';
+
+function dispatchCustomEvent(payload) {
+    const event = new CustomEvent(CUSTOM_EVENT_NAME, {
+        detail: Object.assign({}, payload)
+    });
+
+    window.dispatchEvent(event);
+}
 
 class ButterToast extends Component {
 
-    static raise(payload = {}, options = {}) {
-        const toast = new CustomEvent('ButterToast', {
-            detail: Object.assign({}, payload, options)
-        });
+    static raise(payload = {}) { dispatchCustomEvent(payload); }
+    static dimiss(id) { dispatchCustomEvent({ dismiss: id }); }
+    static dimissAll(id) { dispatchCustomEvent({ dismiss: 'all' }); }
 
-        return window.dispatchEvent(toast);
-    }
+    raise = (payload) => this.tray.push(payload);
+    dismiss = (id) => this.tray.push(id);
+    dismissAll = () => this.tray.dismissAll();
 
     componentDidMount() {
 
@@ -24,16 +33,17 @@ class ButterToast extends Component {
             position,
             timeout,
             spacing,
-            className
+            namespace
         } = this.props;
 
         const style = styles({ vertical: position.vertical, horizontal: position.horizontal, spacing });
         this.root = document.createElement('aside');
-        this.root.setAttribute('class', className ? className : '');
+        this.root.setAttribute('class', this.className);
         Object.assign(this.root.style, style);
         document.body.appendChild(this.root);
 
         ReactDOM.render(<Tray ref={this.createTrayRef}
+            namespace={namespace}
             spacing={spacing}
             timeout={timeout}
             position={position}/>,
@@ -59,8 +69,21 @@ class ButterToast extends Component {
         }
 
         this.id = ref.id;
+        this.tray = ref;
 
         window._btTrays[ref.id] = ref;
+    }
+
+    get className() {
+        const {
+            className,
+            namespace
+        } = this.props;
+
+        return [
+            className,
+            namespace
+        ].reduce((className, current) => current ? `${className} ${current}` : className, 'butter-toast');
     }
 
     render() {
@@ -69,14 +92,15 @@ class ButterToast extends Component {
             renderInContext,
             timeout,
             spacing,
-            className
+            namespace
         } = this.props;
 
         if (renderInContext) {
 
             return (
-                <aside className={className}>
+                <aside className={this.className}>
                     <Tray ref={this.createTrayRef}
+                        namespace={namespace}
                         spacing={spacing}
                         timeout={timeout}/>
                 </aside>
@@ -93,6 +117,8 @@ ButterToast.propTypes = {
 };
 
 ButterToast.defaultProps = {
+    className: '',
+    namespace: '',
     position: {
         vertical: POS_TOP,
         horizontal: POS_RIGHT

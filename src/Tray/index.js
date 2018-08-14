@@ -3,6 +3,7 @@ import { generateId } from '../lib';
 import { Ul, Li } from './styles';
 import { POS_BOTTOM } from '../ButterToast/styles';
 import Toast from '../Toast';
+import { CUSTOM_EVENT_NAME } from '../ButterToast';
 
 class Tray extends Component {
 
@@ -12,6 +13,28 @@ class Tray extends Component {
 
     id = generateId('tray')
     toasts = {}
+
+    componentDidMount() {
+        window.addEventListener(CUSTOM_EVENT_NAME, this.onButterToast);
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener(CUSTOM_EVENT_NAME, this.onButterToast);
+    }
+
+    onButterToast = ({detail} = {}) => {
+        const {namespace, dismiss, ...payload} = detail;
+
+        if (namespace && namespace !== this.props.namespace) {
+            return;
+        }
+
+        if (!dismiss) {
+            return this.push(payload);
+        }
+
+        dismiss === 'all' ? this.dismissAll() : this.dismiss(dismiss);
+    }
 
     createToastRef = (id, ref) => {
         if (!id) {
@@ -39,7 +62,7 @@ class Tray extends Component {
         });
     }
 
-    pop = (id) => {
+    dismiss = (id) => {
         this.setState((prevState) => {
             const nextState = Object.assign({}, prevState);
             nextState.toasts = nextState.toasts.filter((toast) => toast.id !== id);
@@ -47,7 +70,7 @@ class Tray extends Component {
         });
     }
 
-    popAll = () => {
+    dismissAll = () => {
         for (const toast in this.toasts) {
             if (this.toasts[toast] && this.toasts[toast].close) {
                 this.toasts[toast].close();
@@ -86,7 +109,7 @@ class Tray extends Component {
 
                     return (
                         <Li key={toast.id} offset={currentOffset} spacing={spacing} position={position}>
-                            <Toast pop={this.pop}
+                            <Toast dismiss={this.dismiss}
                                 setHeight={this.setHeight}
                                 position={position}
                                 ref={(ref) => this.createToastRef(toast.id, ref)}

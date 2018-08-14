@@ -3,16 +3,11 @@ import PropTypes from 'prop-types';
 import Div, { SCHEME_GREY, SCHEME_RED, SCHEME_ORANGE, SCHEME_GREEN, SCHEME_BLUE } from './style';
 import { getRenderable } from '../../lib';
 
-function Crunch({ dismissible, title, content, dismiss, toastId, scheme, onClick, onDismiss }) {
-
-    const handleDismiss = (e) => {
-        dismiss();
-        onDismiss(e, { toastId });
-    };
+function Crunch({ dismissible, title, content, dismiss, toastId, scheme, onClick }) {
 
     return (
         <Div scheme={scheme} hasOnClick={!!onClick}>
-            {dismissible && <button onClick={handleDismiss} className="btn-dismiss">&times;</button>}
+            {dismissible && <button onClick={dismiss} className="btn-dismiss">&times;</button>}
             <span onClick={(e) => onClick && onClick(e, {toastId, dismiss})}>
                 { title && <strong className="title">{getRenderable(title)}</strong> }
                 {content && <div className="content">{getRenderable(content)}</div>}
@@ -36,6 +31,5 @@ Crunch.prototypes = {
 
 Crunch.defaultProps = {
     dismissible: true,
-    scheme: SCHEME_GREY,
-    onDismiss: () => null
+    scheme: SCHEME_GREY
 };

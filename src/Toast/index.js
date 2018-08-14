@@ -78,15 +78,21 @@ class Toast extends Toggler {
 
     togglerDidClose() {
         const {
-            pop,
+            dismiss,
+            onDismiss,
             toast
         } = this.props;
 
-        pop(toast.id);
+        dismiss(toast.id);
+    }
+
+    clickDismiss(e, toastId) {
+        this.close();
+        onDismiss(e, toastId);
     }
 
     toggleContent() {
-        const { toast, pauseOnHover, position, ...props } = this.props;
+        const { toast, pauseOnHover, position, dismiss, ...props } = this.props;
         const { shown, removed } = this.state;
 
         const className = classNames('bt-toast', {
@@ -114,5 +120,6 @@ export default Toast;
 
 Toast.defaultProps = {
     bindBodyClickListener: false,
-    pauseOnHover: true
+    pauseOnHover: true,
+    onDismiss: () => null
 };
