@@ -46,21 +46,15 @@ const schemeColor = (scheme, alpha = 1) => {
 };
 
 const Div = styled(Base)`
-    @keyframes showIcon {
-        0% { transform: scale(.6); }
-        60% { transform: scale(1.1); }
-        100% { transform: scale(1); }
-    }
-
     ${({ hasOnClick }) => hasOnClick ? 'cursor: pointer;' : ''}
     background-color: ${$white};
     min-height: 50px;
-    width: ${({ hasIcon }) => hasIcon ? '400' : '350'}px;
-    padding: 10px 45px 10px ${({ hasIcon }) => hasIcon ? '60' : '10'}px;
+    width: ${({ hasIcon }) => hasIcon ? '350' : '300'}px;
+    padding: 10px 45px 10px ${({ hasIcon }) => hasIcon ? '50' : '10'}px;
     border-radius: 5px;
+    color: ${({ scheme }) => schemeColor(scheme)};
 
     strong.title {
-        color: ${({ scheme }) => schemeColor(scheme)};
         font-size: 15px;
     }
 
@@ -93,20 +87,6 @@ const Div = styled(Base)`
             background-color: ${({ scheme }) => schemeColor(scheme, 0.1)};
         }
     }
-
-    > .icon {
-        top: 0;
-        bottom: 0;
-        left: 0;
-        width: 50px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        position: absolute;
-        animation: showIcon .5s ease .3s forwards;
-    }
-
 `;
 
 export default Div;

@@ -41,17 +41,12 @@ const schemeColor = (scheme, alpha = 1) => {
 };
 
 const Div = styled(Base)`
-    @keyframes showIcon {
-        0% { transform: scale(.6); }
-        60% { transform: scale(1.1); }
-        100% { transform: scale(1); }
-    }
-
     ${({ hasOnClick }) => hasOnClick ? 'cursor: pointer;' : ''}
     background-color: ${({ scheme }) => schemeColor(scheme)};
     min-height: 50px;
-    width: 300px;
-    padding: 10px 45px 10px 10px;
+    width: ${({ hasIcon }) => hasIcon ? '350' : '300'}px;
+    padding: 10px 45px 10px ${({ hasIcon }) => hasIcon ? '50' : '10'}px;
+    color: ${$white};
 
     strong.title {
         color: ${$white};

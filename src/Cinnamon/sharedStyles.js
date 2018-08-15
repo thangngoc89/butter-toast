@@ -19,6 +19,25 @@ const Base = styled.div`
     &:hover {
         box-shadow: 0 3px 20px ${$grey_500};
     }
+
+    @keyframes showIcon {
+        0% { transform: translateY(-100%); opacity: 0;}
+        60% { transform: opacity: 1;}
+        100% { transform: translateY(0); opacity: 1;}
+    }
+
+    .bt-icon {
+        top: 0;
+        bottom: 0;
+        left: 0;
+        width: 50px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        animation: showIcon .3s ease .1s forwards;
+    }
 `;
 
 export {
