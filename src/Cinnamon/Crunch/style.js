@@ -45,7 +45,6 @@ const Div = styled(Base)`
     background-color: ${({ scheme }) => schemeColor(scheme)};
     min-height: 50px;
     width: ${({ hasIcon }) => hasIcon ? '350' : '300'}px;
-    padding: 10px 45px 10px ${({ hasIcon }) => hasIcon ? '50' : '10'}px;
     color: ${$white};
 
     strong.title {

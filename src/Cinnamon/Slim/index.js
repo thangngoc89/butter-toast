@@ -4,13 +4,14 @@ import { Wrapper, Content, SCHEME_DARK, SCHEME_LIGHT } from './style';
 import { getRenderable } from '../../lib';
 
 function Slim({ children, content, className, scheme, position = {}, toastId, dismiss, onClick }) {
+
     if (!children && !content) {
         return null;
     }
 
     return (
         <Wrapper className={className} horizontal={position.horizontal} hasOnClick={!!onClick}>
-            <Content onClick={(e) => onClick && onClick(e, {toastId, dismiss})}
+            <Content onClick={onClick}
                 scheme={scheme}>{getRenderable(content || children)}</Content>
         </Wrapper>
     );

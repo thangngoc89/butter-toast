@@ -1,5 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
+import { action, configureActions } from '@storybook/addon-actions';
 import ButterToast, { Cinnamon } from '../src';
 import { POS_RIGHT, POS_CENTER, POS_LEFT, POS_TOP, POS_BOTTOM } from '../src/ButterToast/styles';
 import Funnies from 'funnies';
@@ -8,8 +9,12 @@ import './styles.scss';
 
 const intervals = [];
 
+const onDismiss = action('onDismiss callback:');
+const onClick = action('onClick callback:');
+
+
 const funnies = new Funnies();
-function start({ kind, sticky = false, scheme, icon } = {}) {
+function start({ kind, sticky = false, scheme, icon, dismissible = true } = {}) {
     let interval;
     intervals.forEach(clearInterval);
     intervals.length = 0;
@@ -31,14 +36,16 @@ function start({ kind, sticky = false, scheme, icon } = {}) {
 
         const style = `scheme-${scheme}`
         const content = funnies.message();
+        const base = { sticky, onClick, onDismiss };
 
         if ('_btTrays' in window) {
             for (const tray in window._btTrays) {
                 if (kind === 'crisp') {
                     window._btTrays[tray].push({
-                        sticky,
+                        ...base,
                         content: <Cinnamon.Crisp scheme={style}
                             title="crisp example"
+                            dismissible={dismissible}
                             content={content}
                             icon={icon ? Icon : null}/> 
                     });
@@ -46,16 +53,17 @@ function start({ kind, sticky = false, scheme, icon } = {}) {
 
                 if (kind === 'crunch') {
                     window._btTrays[tray].push({
-                        sticky,
+                        ...base,
                         content: <Cinnamon.Crunch scheme={style}
                             title="crunch example"
+                            dismissible={dismissible}
                             content={content}
                             icon={icon ? Icon : null}/> 
                     });
                 }
                 if (kind === 'slim') {
                     window._btTrays[tray].push({
-                        sticky,
+                        ...base,
                         content: <Cinnamon.Slim scheme={style}
                             content={content} />
                     });
@@ -131,7 +139,7 @@ storiesOf('Kind::Crisp', module)
         );
     });
 storiesOf('Kind::Crisp::With Icon', module)
-    .add('Red - With Icon', () => {
+    .add('Red', () => {
         start({ kind: 'crisp', scheme: 'red', icon: true });
         return (
             <div>
@@ -140,7 +148,7 @@ storiesOf('Kind::Crisp::With Icon', module)
             </div>
         );
     })
-    .add('Orange - With Icon', () => {
+    .add('Orange', () => {
         start({ kind: 'crisp', scheme: 'orange', icon: true });
         return (
             <div>
@@ -149,7 +157,7 @@ storiesOf('Kind::Crisp::With Icon', module)
             </div>
         );
     })
-    .add('Purple - With Icon', () => {
+    .add('Purple', () => {
         start({ kind: 'crisp', scheme: 'purple', icon: true });
         return (
             <div>
@@ -158,7 +166,7 @@ storiesOf('Kind::Crisp::With Icon', module)
             </div>
         );
     })
-    .add('Green - With Icon', () => {
+    .add('Green', () => {
         start({ kind: 'crisp', scheme: 'green', icon: true });
         return (
             <div>
@@ -167,7 +175,7 @@ storiesOf('Kind::Crisp::With Icon', module)
             </div>
         );
     })
-    .add('Blue - With Icon', () => {
+    .add('Blue', () => {
         start({ kind: 'crisp', scheme: 'blue', icon: true });
         return (
             <div>
@@ -176,7 +184,7 @@ storiesOf('Kind::Crisp::With Icon', module)
             </div>
         );
     })
-    .add('Grey - With Icon', () => {
+    .add('Grey', () => {
         start({ kind: 'crisp', scheme: 'grey', icon: true });
         return (
             <div>
@@ -185,8 +193,63 @@ storiesOf('Kind::Crisp::With Icon', module)
             </div>
         );
     });
+storiesOf('Kind::Crisp::Non dismissible', module)
+    .add('Red', () => {
+        start({ kind: 'crisp', scheme: 'red', icon: true, dismissible: false });
+        return (
+            <div>
+                <ButterToast position={{ vertical: POS_TOP, horizontal: POS_CENTER }} />
+                <button onClick={dismissAll}>Dismiss All</button>
+            </div>
+        );
+    })
+    .add('Orange', () => {
+        start({ kind: 'crisp', scheme: 'orange', icon: true, dismissible: false });
+        return (
+            <div>
+                <ButterToast position={{ vertical: POS_TOP, horizontal: POS_CENTER }} />
+                <button onClick={dismissAll}>Dismiss All</button>
+            </div>
+        );
+    })
+    .add('Purple', () => {
+        start({ kind: 'crisp', scheme: 'purple', icon: true, dismissible: false });
+        return (
+            <div>
+                <ButterToast position={{ vertical: POS_TOP, horizontal: POS_CENTER }} />
+                <button onClick={dismissAll}>Dismiss All</button>
+            </div>
+        );
+    })
+    .add('Green', () => {
+        start({ kind: 'crisp', scheme: 'green', icon: true, dismissible: false });
+        return (
+            <div>
+                <ButterToast position={{ vertical: POS_TOP, horizontal: POS_CENTER }} />
+                <button onClick={dismissAll}>Dismiss All</button>
+            </div>
+        );
+    })
+    .add('Blue', () => {
+        start({ kind: 'crisp', scheme: 'blue', icon: true, dismissible: false });
+        return (
+            <div>
+                <ButterToast position={{ vertical: POS_TOP, horizontal: POS_CENTER }} />
+                <button onClick={dismissAll}>Dismiss All</button>
+            </div>
+        );
+    })
+    .add('Grey', () => {
+        start({ kind: 'crisp', scheme: 'grey', icon: true, dismissible: false });
+        return (
+            <div>
+                <ButterToast position={{ vertical: POS_TOP, horizontal: POS_CENTER }} />
+                <button onClick={dismissAll}>Dismiss All</button>
+            </div>
+        );
+    });
 storiesOf('Kind::Crisp::Sticky', module)
-    .add('Red - sticky', () => {
+    .add('Red', () => {
         start({ kind: 'crisp', scheme: 'red', sticky: true });
         return (
             <div>
@@ -195,7 +258,7 @@ storiesOf('Kind::Crisp::Sticky', module)
             </div>
         );
     })
-    .add('Orange - sticky', () => {
+    .add('Orange', () => {
         start({ kind: 'crisp', scheme: 'orange', sticky: true });
         return (
             <div>
@@ -204,7 +267,7 @@ storiesOf('Kind::Crisp::Sticky', module)
             </div>
         );
     })
-    .add('Purple - sticky', () => {
+    .add('Purple', () => {
         start({ kind: 'crisp', scheme: 'purple', sticky: true });
         return (
             <div>
@@ -213,7 +276,7 @@ storiesOf('Kind::Crisp::Sticky', module)
             </div>
         );
     })
-    .add('Green - sticky', () => {
+    .add('Green', () => {
         start({ kind: 'crisp', scheme: 'green', sticky: true });
         return (
             <div>
@@ -222,7 +285,7 @@ storiesOf('Kind::Crisp::Sticky', module)
             </div>
         );
     })
-    .add('Blue - sticky', () => {
+    .add('Blue', () => {
         start({ kind: 'crisp', scheme: 'blue', sticky: true });
         return (
             <div>
@@ -231,7 +294,7 @@ storiesOf('Kind::Crisp::Sticky', module)
             </div>
         );
     })
-    .add('Grey - sticky', () => {
+    .add('Grey', () => {
         start({ kind: 'crisp', scheme: 'grey', sticky: true });
         return (
             <div>
@@ -297,7 +360,7 @@ storiesOf('Kind::crunch', module)
         );
     });
 storiesOf('Kind::crunch::With Icon', module)
-    .add('Red - with icon', () => {
+    .add('Red', () => {
         start({ kind: 'crunch', scheme: 'red', icon: true });
         return (
             <div>
@@ -306,7 +369,7 @@ storiesOf('Kind::crunch::With Icon', module)
             </div>
         );
     })
-    .add('Orange - with icon', () => {
+    .add('Orange', () => {
         start({ kind: 'crunch', scheme: 'orange', icon: true });
         return (
             <div>
@@ -315,7 +378,7 @@ storiesOf('Kind::crunch::With Icon', module)
             </div>
         );
     })
-    .add('Green - with icon', () => {
+    .add('Green', () => {
         start({ kind: 'crunch', scheme: 'green', icon: true });
         return (
             <div>
@@ -324,7 +387,7 @@ storiesOf('Kind::crunch::With Icon', module)
             </div>
         );
     })
-    .add('Blue - with icon', () => {
+    .add('Blue', () => {
         start({ kind: 'crunch', scheme: 'blue', icon: true });
         return (
             <div>
@@ -333,7 +396,7 @@ storiesOf('Kind::crunch::With Icon', module)
             </div>
         );
     })
-    .add('Grey - with icon', () => {
+    .add('Grey', () => {
         start({ kind: 'crunch', scheme: 'grey', icon: true });
         return (
             <div>
@@ -342,8 +405,54 @@ storiesOf('Kind::crunch::With Icon', module)
             </div>
         );
     });
+storiesOf('Kind::crunch::Non dismissible', module)
+    .add('Red', () => {
+        start({ kind: 'crunch', scheme: 'red', icon: true, dismissible: false });
+        return (
+            <div>
+                <ButterToast position={{ vertical: POS_TOP, horizontal: POS_CENTER }} />
+                <button onClick={dismissAll}>Dismiss All</button>
+            </div>
+        );
+    })
+    .add('Orange', () => {
+        start({ kind: 'crunch', scheme: 'orange', icon: true, dismissible: false });
+        return (
+            <div>
+                <ButterToast position={{ vertical: POS_TOP, horizontal: POS_CENTER }} />
+                <button onClick={dismissAll}>Dismiss All</button>
+            </div>
+        );
+    })
+    .add('Green', () => {
+        start({ kind: 'crunch', scheme: 'green', icon: true, dismissible: false });
+        return (
+            <div>
+                <ButterToast position={{ vertical: POS_TOP, horizontal: POS_CENTER }} />
+                <button onClick={dismissAll}>Dismiss All</button>
+            </div>
+        );
+    })
+    .add('Blue', () => {
+        start({ kind: 'crunch', scheme: 'blue', icon: true, dismissible: false });
+        return (
+            <div>
+                <ButterToast position={{ vertical: POS_TOP, horizontal: POS_CENTER }} />
+                <button onClick={dismissAll}>Dismiss All</button>
+            </div>
+        );
+    })
+    .add('Grey', () => {
+        start({ kind: 'crunch', scheme: 'grey', icon: true, dismissible: false });
+        return (
+            <div>
+                <ButterToast position={{ vertical: POS_TOP, horizontal: POS_CENTER }} />
+                <button onClick={dismissAll}>Dismiss All</button>
+            </div>
+        );
+    });
 storiesOf('Kind::crunch::Sticky', module)
-    .add('Red - sticky', () => {
+    .add('Red', () => {
         start({ kind: 'crunch', scheme: 'red', sticky: true });
         return (
             <div>
@@ -352,7 +461,7 @@ storiesOf('Kind::crunch::Sticky', module)
             </div>
         );
     })
-    .add('Orange - sticky', () => {
+    .add('Orange', () => {
         start({ kind: 'crunch', scheme: 'orange', sticky: true });
         return (
             <div>
@@ -361,7 +470,7 @@ storiesOf('Kind::crunch::Sticky', module)
             </div>
         );
     })
-    .add('Green - sticky', () => {
+    .add('Green', () => {
         start({ kind: 'crunch', scheme: 'green', sticky: true });
         return (
             <div>
@@ -370,7 +479,7 @@ storiesOf('Kind::crunch::Sticky', module)
             </div>
         );
     })
-    .add('Blue - sticky', () => {
+    .add('Blue', () => {
         start({ kind: 'crunch', scheme: 'blue', sticky: true });
         return (
             <div>
@@ -379,7 +488,7 @@ storiesOf('Kind::crunch::Sticky', module)
             </div>
         );
     })
-    .add('Grey - sticky', () => {
+    .add('Grey', () => {
         start({ kind: 'crunch', scheme: 'grey', sticky: true });
         return (
             <div>
@@ -445,7 +554,7 @@ storiesOf('Kind::Slim', module)
         );
     });
 storiesOf('Kind::Slim::Sticky', module)
-    .add('Dark - sticky', () => {
+    .add('Dark', () => {
         start({ kind: 'slim', scheme: 'dark', sticky: true });
         return (
             <div>
@@ -454,7 +563,7 @@ storiesOf('Kind::Slim::Sticky', module)
             </div>
         );
     })
-    .add('Light - sticky', () => {
+    .add('Light', () => {
         start({ kind: 'slim', scheme: 'light', sticky: true });
         return (
             <div>

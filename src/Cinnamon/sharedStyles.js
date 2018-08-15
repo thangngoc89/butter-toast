@@ -6,7 +6,7 @@ import {
 
 const Base = styled.div`
     font-family: Arial, Helvetica, sans-serif;
-    display: inline-block;
+    display: flex;
     font-size: 11px;
     line-height: 14px;
     position: relative;
@@ -15,6 +15,15 @@ const Base = styled.div`
     transition: box-shadow .3s;
     overflow: hidden;
     z-index: 1;
+
+    > span {
+        flex: 1;
+        padding: 10px ${({dismissible}) => dismissible ? '45' : '10' }px 10px ${({ hasIcon }) => hasIcon ? '50' : '10'}px;
+    }
+
+    .btn-dismiss {
+        z-index: 3;
+    }
 
     &:hover {
         box-shadow: 0 3px 20px ${$grey_500};
@@ -36,7 +45,7 @@ const Base = styled.div`
         justify-content: center;
         align-items: center;
         position: absolute;
-        animation: showIcon .3s ease .1s forwards;
+        animation: showIcon .4s ease 0s forwards;
     }
 `;
 

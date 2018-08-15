@@ -79,19 +79,20 @@ class Toast extends Toggler {
     togglerDidClose() {
         const {
             dismiss,
-            onDismiss,
             toast
         } = this.props;
 
         dismiss(toast.id);
     }
 
-    clickDismiss(e, toastId) {
+    clickDismiss = (e) => {
+        const { toast } = this.props;
         this.close();
-        onDismiss(e, toastId);
+        toast.onDismiss && toast.onDismiss(e, toast);
     }
 
     toggleContent() {
+
         const { toast, pauseOnHover, position, dismiss, ...props } = this.props;
         const { shown, removed } = this.state;
 
@@ -106,7 +107,8 @@ class Toast extends Toggler {
                 className={className}>
                 {getRenderable(toast.content, {
                     toastId: toast.id,
-                    dismiss: this.close,
+                    dismiss: this.clickDismiss,
+                    onClick: toast.onClick ? (e) => toast.onClick(e, toast) : undefined,
                     calcRemaining: this.calcRemaining,
                     position,
                     ...props
@@ -121,5 +123,5 @@ export default Toast;
 Toast.defaultProps = {
     bindBodyClickListener: false,
     pauseOnHover: true,
-    onDismiss: () => null
+    toast: {}
 };

@@ -6,9 +6,9 @@ import { getRenderable } from '../../lib';
 function Crunch({ dismissible, title, content, icon, dismiss, toastId, scheme, onClick }) {
 
     return (
-        <Div hasIcon={!!icon} scheme={scheme} hasOnClick={!!onClick}>
+        <Div hasIcon={!!icon} scheme={scheme} hasOnClick={!!onClick} dismissible={dismissible}>
             {dismissible && <button onClick={dismiss} className="btn-dismiss">&times;</button>}
-            <span onClick={(e) => onClick && onClick(e, {toastId, dismiss})}>
+            <span onClick={onClick}>
                 { icon && <div className="bt-icon">{getRenderable(icon)}</div> }
                 { title && <strong className="title">{getRenderable(title)}</strong> }
                 {content && <div className="content">{getRenderable(content)}</div>}

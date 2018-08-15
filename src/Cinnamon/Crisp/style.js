@@ -50,7 +50,6 @@ const Div = styled(Base)`
     background-color: ${$white};
     min-height: 50px;
     width: ${({ hasIcon }) => hasIcon ? '350' : '300'}px;
-    padding: 10px 45px 10px ${({ hasIcon }) => hasIcon ? '50' : '10'}px;
     border-radius: 5px;
     color: ${({ scheme }) => schemeColor(scheme)};
 

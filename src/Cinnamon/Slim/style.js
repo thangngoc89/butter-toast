@@ -25,7 +25,7 @@ export const Wrapper = styled.div`
 
 export const Content = styled(Base)`
     ${({ hasOnClick }) => hasOnClick ? 'cursor: pointer;' : ''}
-    text-align: 'center';
+    text-align: center;
     ${({ scheme }) => scheme === SCHEME_DARK ? `
         color: ${$grey_100};
         background-color: ${$grey_800}` : `
@@ -33,4 +33,5 @@ export const Content = styled(Base)`
         background-color: ${$grey_100} `}
     padding: 5px 10px;
     border-radius: 3px;
+    display: inline-block;
 `;

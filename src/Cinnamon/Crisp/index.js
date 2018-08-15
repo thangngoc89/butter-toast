@@ -6,8 +6,8 @@ import { getRenderable } from '../../lib';
 function Crisp({ dismissible, icon, title, content, dismiss, toastId, scheme, onClick }) {
 
     return (
-        <Div hasIcon={!!icon} scheme={scheme} hasOnClick={!!onClick}>
-            <span onClick={(e) => onClick && onClick(e, {toastId, dismiss})}>
+        <Div hasIcon={!!icon} scheme={scheme} hasOnClick={!!onClick} dismissible={dismissible}>
+            <span onClick={onClick}>
                 { icon && <div className="bt-icon">{getRenderable(icon)}</div> }
                 { title && <strong className="title">{getRenderable(title)}</strong> }
                 {content && <div className="content">{getRenderable(content)}</div>}
