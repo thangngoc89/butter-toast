@@ -11,9 +11,6 @@ class Tray extends Component {
         toasts: []
     }
 
-    id = generateId('tray')
-    toasts = {}
-
     componentDidMount() {
         window.addEventListener(CUSTOM_EVENT_NAME, this.onButterToast);
     }
@@ -21,6 +18,9 @@ class Tray extends Component {
     componentWillUnmount() {
         window.removeEventListener(CUSTOM_EVENT_NAME, this.onButterToast);
     }
+
+    id = generateId('tray')
+    toasts = {}
 
     onButterToast = ({detail} = {}) => {
         const {namespace, dismiss, ...payload} = detail;
