@@ -62,7 +62,7 @@ class Tray extends Component {
         });
     }
 
-    pop = (id) => {
+    remove = (id) => {
         this.setState((prevState) => {
             const nextState = Object.assign({}, prevState);
             nextState.toasts = nextState.toasts.filter((toast) => toast.id !== id);
@@ -114,7 +114,7 @@ class Tray extends Component {
                     return (
                         <Li key={toast.id} offset={currentOffset} spacing={spacing} position={position}>
                             <Toast dismiss={() => this.dismiss(toast.id)}
-                                pop={() => this.pop(toast.id)}
+                                remove={() => this.remove(toast.id)}
                                 setHeight={this.setHeight}
                                 position={position}
                                 ref={(ref) => this.createToastRef(toast.id, ref)}

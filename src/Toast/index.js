@@ -77,7 +77,7 @@ class Toast extends Toggler {
     }
 
     togglerDidClose() {
-        this.props.pop();
+        this.props.remove();
     }
 
     get className() {
