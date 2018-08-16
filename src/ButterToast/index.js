@@ -16,8 +16,8 @@ function dispatchCustomEvent(payload) {
 class ButterToast extends Component {
 
     static raise(payload = {}) { dispatchCustomEvent(payload); }
-    static dimiss(id) { dispatchCustomEvent({ dismiss: id }); }
-    static dimissAll(id) { dispatchCustomEvent({ dismiss: 'all' }); }
+    static dismiss(id) { dispatchCustomEvent({ dismiss: id }); }
+    static dismissAll(id) { dispatchCustomEvent({ dismiss: 'all' }); }
 
     raise = (payload) => this.tray.push(payload);
     dismiss = (id) => this.tray.push(id);

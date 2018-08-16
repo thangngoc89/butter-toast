@@ -23,8 +23,8 @@ const Ul = styled.ul`
         }
 
         > .bt-toast.removed {
-            transform: scale(.8);
-            transition: opacity .5s, transform .6s;
+            transform: scale(.9);
+            transition: opacity .3s, transform .4s;
         }
     }
 `;

@@ -9,9 +9,8 @@ import './styles.scss';
 
 const intervals = [];
 
-const onDismiss = action('onDismiss callback:');
+const dismiss = (e, toast, dismiss) => { action('onDismiss callback:')(e, toast, dismiss); dismiss(); };
 const onClick = action('onClick callback:');
-
 
 const funnies = new Funnies();
 function start({ kind, sticky = false, scheme, icon, dismissible = true } = {}) {
@@ -19,10 +18,22 @@ function start({ kind, sticky = false, scheme, icon, dismissible = true } = {}) 
     intervals.forEach(clearInterval);
     intervals.length = 0;
 
-    const chosenIcon = sample(['trash', 'pencil', 'info', 'times', 'warning', 'check', 'phone', 'bolt', 'circle-thin', 'ellipsis-h', 'wifi']);
+    const chosenIcon = sample([
+        'trash',
+        'pencil',
+        'info',
+        'times',
+        'warning',
+        'check',
+        'phone',
+        'bolt',
+        'circle-thin',
+        'ellipsis-h',
+        'wifi'
+    ]);
 
     function Icon() {
-        return <i className={`fa fa-${chosenIcon}`}/>
+        return <i className={`fa fa-${chosenIcon}`}/>;
     }
 
     let counter = 0;
@@ -36,7 +47,7 @@ function start({ kind, sticky = false, scheme, icon, dismissible = true } = {}) 
 
         const style = `scheme-${scheme}`
         const content = funnies.message();
-        const base = { sticky, onClick, onDismiss };
+        const base = { sticky, onClick, dismiss };
 
         if ('_btTrays' in window) {
             for (const tray in window._btTrays) {
@@ -47,7 +58,7 @@ function start({ kind, sticky = false, scheme, icon, dismissible = true } = {}) 
                             title="crisp example"
                             dismissible={dismissible}
                             content={content}
-                            icon={icon ? Icon : null}/> 
+                            icon={icon ? Icon : null}/>
                     });
                 }
 
@@ -58,7 +69,7 @@ function start({ kind, sticky = false, scheme, icon, dismissible = true } = {}) 
                             title="crunch example"
                             dismissible={dismissible}
                             content={content}
-                            icon={icon ? Icon : null}/> 
+                            icon={icon ? Icon : null}/>
                     });
                 }
                 if (kind === 'slim') {

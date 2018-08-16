@@ -62,7 +62,7 @@ class Tray extends Component {
         });
     }
 
-    dismiss = (id) => {
+    pop = (id) => {
         this.setState((prevState) => {
             const nextState = Object.assign({}, prevState);
             nextState.toasts = nextState.toasts.filter((toast) => toast.id !== id);
@@ -70,11 +70,15 @@ class Tray extends Component {
         });
     }
 
+    dismiss = (id) => {
+        if (this.toasts[id] && this.toasts[id].close) {
+            this.toasts[id].close();
+        }
+    }
+
     dismissAll = () => {
         for (const toast in this.toasts) {
-            if (this.toasts[toast] && this.toasts[toast].close) {
-                this.toasts[toast].close();
-            }
+            this.dismiss(toast);
         }
     }
 
@@ -109,7 +113,8 @@ class Tray extends Component {
 
                     return (
                         <Li key={toast.id} offset={currentOffset} spacing={spacing} position={position}>
-                            <Toast dismiss={this.dismiss}
+                            <Toast dismiss={() => this.dismiss(toast.id)}
+                                pop={() => this.pop(toast.id)}
                                 setHeight={this.setHeight}
                                 position={position}
                                 ref={(ref) => this.createToastRef(toast.id, ref)}

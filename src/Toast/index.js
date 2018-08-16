@@ -77,18 +77,24 @@ class Toast extends Toggler {
     }
 
     togglerDidClose() {
-        const {
-            dismiss,
-            toast
-        } = this.props;
-
-        dismiss(toast.id);
+        this.props.pop();
     }
 
-    clickDismiss = (e) => {
-        const { toast } = this.props;
-        this.close();
-        toast.onDismiss && toast.onDismiss(e, toast);
+    get className() {
+        return [
+            'shown',
+            'removed'
+        ].reduce((className, current) => this.state[current]
+            ? `${className} ${current}`
+            : className, 'bt-toast');
+    }
+
+    get dismiss() {
+        const { toast, dismiss } = this.props;
+        if (typeof toast.dismiss === 'function') {
+            return (e) => toast.dismiss(e, toast, dismiss)
+        }
+        return dismiss;
     }
 
     toggleContent() {
@@ -96,18 +102,14 @@ class Toast extends Toggler {
         const { dismiss, toast, pauseOnHover, position, ...props } = this.props;
         const { shown, removed } = this.state;
 
-        const className = classNames('bt-toast', {
-            shown, removed
-        });
-
         return (
             <div ref={this.createRef}
                 onMouseEnter={() => pauseOnHover && this.clearTimeout()}
                 onMouseLeave={() => pauseOnHover && this.startTimeout()}
-                className={className}>
+                className={this.className}>
                 {getRenderable(toast.content, {
                     toastId: toast.id,
-                    dismiss: this.clickDismiss,
+                    dismiss: this.dismiss,
                     onClick: toast.onClick ? (e) => toast.onClick(e, toast) : undefined,
                     calcRemaining: this.calcRemaining,
                     position,

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Div, { SCHEME_GREY, SCHEME_RED, SCHEME_ORANGE, SCHEME_PURPLE, SCHEME_GREEN, SCHEME_BLUE } from './style';
 import { getRenderable } from '../../lib';
 
-function Crisp({ dismissible, icon, title, content, dismiss, toastId, scheme, onClick }) {
+function Crisp({ dismissible, dismiss, icon, title, content, toastId, scheme, onClick }) {
 
     return (
         <Div hasIcon={!!icon} scheme={scheme} hasOnClick={!!onClick} dismissible={dismissible}>
