@@ -9,7 +9,7 @@ const Ul = styled.ul`
 
     > li {
         position: absolute;
-        transition transform .3s;
+        transition transform .5s;
 
         > .bt-toast {
             opacity: 0;
@@ -30,8 +30,15 @@ const Ul = styled.ul`
 `;
 
 const Li = styled.li`
-    ${({ position, spacing, offset }) => {
-        const translateY = `translateY(${offset}px)`;
+    ${({ position, spacing, offset, height }) => {
+        let translateY;
+
+        if (offset === 0 && !height && position.vertical === 'POS_TOP') {
+            translateY = 'translateY(-100%)';
+        } else {
+            translateY = `translateY(${offset}px)`;
+        }
+
         switch (position.horizontal) {
             case POS_RIGHT:
                 return `right: ${spacing}px; transform: ${translateY}`;

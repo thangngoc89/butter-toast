@@ -32,7 +32,6 @@ class Toast extends Toggler {
     }
 
     clearTimeout = () => {
-
         if (this.props.toast.sticky) {
             return;
         }
@@ -63,10 +62,7 @@ class Toast extends Toggler {
         const ref = this.toastRef;
         this.clearTimeout();
 
-        this.setState({
-            shown: false,
-            removed: true
-        }, () => {
+        this.setState({ shown: false, removed: true }, () => {
             ref.addEventListener('transitionend', function cb(e) {
                 if (e.target === ref) {
                     ref.removeEventListener(e.type, cb);
@@ -98,7 +94,6 @@ class Toast extends Toggler {
     }
 
     toggleContent() {
-
         const { dismiss, toast, pauseOnHover, position, ...props } = this.props;
         const { shown, removed } = this.state;
 

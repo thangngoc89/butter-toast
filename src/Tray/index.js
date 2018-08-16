@@ -112,11 +112,12 @@ class Tray extends Component {
                     }
 
                     return (
-                        <Li key={toast.id} offset={currentOffset} spacing={spacing} position={position}>
+                        <Li key={toast.id} offset={currentOffset} spacing={spacing} position={position} height={height}>
                             <Toast dismiss={() => this.dismiss(toast.id)}
                                 remove={() => this.remove(toast.id)}
                                 setHeight={this.setHeight}
                                 position={position}
+                                height={height}
                                 ref={(ref) => this.createToastRef(toast.id, ref)}
                                 toast={toast}/>
                         </Li>
