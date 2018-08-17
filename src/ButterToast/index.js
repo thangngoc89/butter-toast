@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
-import styles, { POS_RIGHT, POS_TOP } from './styles';
+import styles, { POS_TOP, POS_BOTTOM, POS_LEFT, POS_RIGHT, POS_CENTER } from './styles';
 import Tray from '../Tray';
 export const CUSTOM_EVENT_NAME = 'ButterToast';
 
@@ -24,7 +24,6 @@ class ButterToast extends Component {
     dismissAll = () => this.tray.dismissAll();
 
     componentDidMount() {
-
         if (this.props.renderInContext) {
             return;
         }
@@ -36,7 +35,7 @@ class ButterToast extends Component {
             namespace
         } = this.props;
 
-        const style = styles({ vertical: position.vertical, horizontal: position.horizontal, spacing });
+        const style = styles(position, spacing);
         this.root = document.createElement('aside');
         this.root.setAttribute('class', this.className);
         Object.assign(this.root.style, style);
@@ -87,7 +86,6 @@ class ButterToast extends Component {
     }
 
     render() {
-
         const {
             renderInContext,
             timeout,
@@ -113,7 +111,17 @@ class ButterToast extends Component {
 
 ButterToast.propTypes = {
     renderInContext: PropTypes.bool,
-    className: PropTypes.string
+    className: PropTypes.string,
+    namespace: PropTypes.string,
+    position: PropTypes.oneOf([
+        PropTypes.objectOf({
+            vertical: PropTypes.oneOf([POS_TOP, POS_BOTTOM]),
+            horizontal: PropTypes.oneOf([POS_LEFT, POS_RIGHT, POS_CENTER])
+        }),
+        null
+    ]),
+    timout: PropTypes.number,
+    spacing: PropTypes.number
 };
 
 ButterToast.defaultProps = {

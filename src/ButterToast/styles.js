@@ -29,9 +29,13 @@ const styleBase = {
     zIndex: 99999
 };
 
-export default function styles({
-    vertical = POS_TOP, horizontal = POS_RIGHT, spacing = 0
-} = {}) {
+export default function styles(position = {}, spacing = 0) {
+
+    if (position === null) {
+        return {};
+    }
+
+    let { vertical, horizontal } = position;
 
     return Object.assign({}, styleBase,
         vertical === POS_BOTTOM ? {bottom: `${spacing}px`} : {top: `${spacing}px`},
