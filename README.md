@@ -1,5 +1,7 @@
 # Butter Toast
 
+![ButterToast](assets/crisp-blue.gif)
+
 Butter Toast is a toast notification system for React apps that puts an emphasis on ease of use, customizability and butter-smooth transitions.
 
 Butter Toast comes with a few built-in styles which you can apply, and you can also use any component for creating the notifications.

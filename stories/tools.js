@@ -9,28 +9,12 @@ const intervals = [];
 const dismiss = (e, toast, dismiss) => { action('onDismiss callback:')(e, toast, dismiss); dismiss(); };
 const onClick = action('onClick callback:');
 
-export function start({ kind, sticky = false, scheme, icon, dismissible = true } = {}) {
+const chooseIcon = () => sample([ 'trash', 'pencil', 'info', 'times', 'warning', 'check', 'phone', 'bolt', 'circle-thin', 'ellipsis-h', 'wifi' ]);
+
+export function start({ kind, sticky = true, scheme, icon, dismissible = true } = {}) {
     let interval;
     intervals.forEach(clearInterval);
     intervals.length = 0;
-
-    const chosenIcon = sample([
-        'trash',
-        'pencil',
-        'info',
-        'times',
-        'warning',
-        'check',
-        'phone',
-        'bolt',
-        'circle-thin',
-        'ellipsis-h',
-        'wifi'
-    ]);
-
-    function Icon() {
-        return <i className={`fa fa-${chosenIcon}`}/>;
-    }
 
     let counter = 0;
 
@@ -41,9 +25,11 @@ export function start({ kind, sticky = false, scheme, icon, dismissible = true }
             clearInterval(interval);
         }
 
-        const style = `scheme-${scheme}`
+        const style = `scheme-${scheme}`;
         const content = funnies.message();
-        const base = { sticky, onClick, dismiss };
+        const Icon = <i className={`fa fa-${chooseIcon()}`}/>;
+
+        const base = { sticky, onClick, dismiss, timeout: 7000 };
 
         if (kind === 'crisp') {
             ButterToast.raise({
@@ -70,18 +56,16 @@ export function start({ kind, sticky = false, scheme, icon, dismissible = true }
             ButterToast.raise({
                 ...base,
                 content: <Cinnamon.Slim scheme={style}
-                    content={content} />
+                    content={content}/>
             });
         }
 
     };
-    fire();
+    // setTimeout(fire);
     interval = setInterval(fire, 2000);
     intervals.push(interval);
 }
 
 export const dismissAll = () => {
-    window.dispatchEvent(new CustomEvent('ButterToast', {detail:{
-	    dismiss: 'all'
-    }}));
-}
+    window.dispatchEvent(new CustomEvent('ButterToast', {detail:{ dismiss: 'all' }}));
+};

@@ -8,7 +8,7 @@ export const CUSTOM_EVENT_NAME = 'ButterToast';
 
 function dispatchCustomEvent(payload) {
     const event = new CustomEvent(CUSTOM_EVENT_NAME, {
-        detail: Object.assign({}, payload)
+        detail: Object.assign({ namespace: '' }, payload)
     });
 
     window.dispatchEvent(event);

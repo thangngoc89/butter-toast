@@ -29,9 +29,7 @@ class Tray extends Component {
 
     onButterToast({detail} = {}) {
 
-        const { dismissBy, ...payload } = detail;
-
-        const namespace = detail.namespace || '';
+        const { namespace, dismissBy, ...payload } = detail;
 
         if (namespace && namespace !== this.props.namespace) {
             return;
