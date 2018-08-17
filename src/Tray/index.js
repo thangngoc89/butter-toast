@@ -7,6 +7,11 @@ import { CUSTOM_EVENT_NAME } from '../ButterToast';
 
 class Tray extends Component {
 
+    constructor(props) {
+        super(props);
+        this.onButterToast = this.onButterToast.bind(this);
+    }
+
     state = {
         toasts: []
     }
@@ -22,18 +27,21 @@ class Tray extends Component {
     id = generateId('tray')
     toasts = {}
 
-    onButterToast = ({detail} = {}) => {
-        const {namespace, dismiss, ...payload} = detail;
+    onButterToast({detail} = {}) {
+
+        const { dismissBy, ...payload } = detail;
+
+        const namespace = detail.namespace || '';
 
         if (namespace && namespace !== this.props.namespace) {
             return;
         }
 
-        if (!dismiss) {
+        if (!dismissBy) {
             return this.push(payload);
         }
 
-        dismiss === 'all' ? this.dismissAll() : this.dismiss(dismiss);
+        dismissBy === 'all' ? this.dismissAll() : this.dismiss(dismissBy);
     }
 
     createToastRef = (id, ref) => {

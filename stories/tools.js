@@ -45,37 +45,33 @@ export function start({ kind, sticky = false, scheme, icon, dismissible = true }
         const content = funnies.message();
         const base = { sticky, onClick, dismiss };
 
-        if ('_btTrays' in window) {
-            for (const tray in window._btTrays) {
-                if (kind === 'crisp') {
-                    window._btTrays[tray].push({
-                        ...base,
-                        content: <Cinnamon.Crisp scheme={style}
-                            title="crisp example"
-                            dismissible={dismissible}
-                            content={content}
-                            icon={icon ? Icon : null}/>
-                    });
-                }
+        if (kind === 'crisp') {
+            ButterToast.raise({
+                ...base,
+                content: <Cinnamon.Crisp scheme={style}
+                    title="crisp example"
+                    dismissible={dismissible}
+                    content={content}
+                    icon={icon ? Icon : null}/>
+            });
+        }
 
-                if (kind === 'crunch') {
-                    window._btTrays[tray].push({
-                        ...base,
-                        content: <Cinnamon.Crunch scheme={style}
-                            title="crunch example"
-                            dismissible={dismissible}
-                            content={content}
-                            icon={icon ? Icon : null}/>
-                    });
-                }
-                if (kind === 'slim') {
-                    window._btTrays[tray].push({
-                        ...base,
-                        content: <Cinnamon.Slim scheme={style}
-                            content={content} />
-                    });
-                }
-            }
+        if (kind === 'crunch') {
+            ButterToast.raise({
+                ...base,
+                content: <Cinnamon.Crunch scheme={style}
+                    title="crunch example"
+                    dismissible={dismissible}
+                    content={content}
+                    icon={icon ? Icon : null}/>
+            });
+        }
+        if (kind === 'slim') {
+            ButterToast.raise({
+                ...base,
+                content: <Cinnamon.Slim scheme={style}
+                    content={content} />
+            });
         }
 
     };

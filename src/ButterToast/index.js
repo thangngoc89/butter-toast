@@ -22,8 +22,8 @@ class ButterToast extends Component {
         return id;
     }
 
-    static dismiss(id) { dispatchCustomEvent({ dismiss: id }); }
-    static dismissAll() { dispatchCustomEvent({ dismiss: 'all' }); }
+    static dismiss(id) { dispatchCustomEvent({ dismissBy: id }); }
+    static dismissAll(id) { dispatchCustomEvent({ dismissBy: 'all' }); }
 
     raise = (payload = {}) => {
         const id = generateId();
@@ -124,13 +124,10 @@ ButterToast.propTypes = {
     renderInContext: PropTypes.bool,
     className: PropTypes.string,
     namespace: PropTypes.string,
-    position: PropTypes.oneOf([
-        PropTypes.objectOf({
-            vertical: PropTypes.oneOf([POS_TOP, POS_BOTTOM]),
-            horizontal: PropTypes.oneOf([POS_LEFT, POS_RIGHT, POS_CENTER])
-        }),
-        null
-    ]),
+    // position: PropTypes.objectOf({
+    //     vertical: PropTypes.oneOf([POS_TOP, POS_BOTTOM]),
+    //     horizontal: PropTypes.oneOf([POS_LEFT, POS_RIGHT, POS_CENTER])
+    // }),
     timout: PropTypes.number,
     spacing: PropTypes.number
 };
