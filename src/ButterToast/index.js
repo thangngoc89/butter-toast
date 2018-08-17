@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
+import { generateId } from '../lib';
 import styles, { POS_TOP, POS_BOTTOM, POS_LEFT, POS_RIGHT, POS_CENTER } from './styles';
 import Tray from '../Tray';
 export const CUSTOM_EVENT_NAME = 'ButterToast';
@@ -15,11 +16,21 @@ function dispatchCustomEvent(payload) {
 
 class ButterToast extends Component {
 
-    static raise(payload = {}) { dispatchCustomEvent(payload); }
-    static dismiss(id) { dispatchCustomEvent({ dismiss: id }); }
-    static dismissAll(id) { dispatchCustomEvent({ dismiss: 'all' }); }
+    static raise(payload = {}) {
+        const id = generateId();
+        dispatchCustomEvent({ id, ...payload });
+        return id;
+    }
 
-    raise = (payload) => this.tray.push(payload);
+    static dismiss(id) { dispatchCustomEvent({ dismiss: id }); }
+    static dismissAll() { dispatchCustomEvent({ dismiss: 'all' }); }
+
+    raise = (payload = {}) => {
+        const id = generateId();
+        this.tray.push({ id, ...payload });
+        return id;
+    }
+
     dismiss = (id) => this.tray.push(id);
     dismissAll = () => this.tray.dismissAll();
 

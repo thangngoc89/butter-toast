@@ -50,13 +50,12 @@ class Tray extends Component {
     }
 
     push = (payload = {}) => {
-        const id = generateId();
         const timeout = this.props.timeout;
 
         this.setState((prevState) => {
             const nextState = Object.assign({}, prevState);
             nextState.toasts = [{
-                id, timeout, ...payload
+                timeout, ...payload
             }].concat(nextState.toasts);
             return nextState;
         });

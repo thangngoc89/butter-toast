@@ -33,5 +33,8 @@ Crunch.prototypes = {
 
 Crunch.defaultProps = {
     dismissible: true,
-    scheme: SCHEME_GREY
+    scheme: SCHEME_GREY,
+    title: null,
+    content: null,
+    icon: null
 };

@@ -105,7 +105,7 @@ class Toast extends Toggler {
                 {getRenderable(toast.content, {
                     toastId: toast.id,
                     dismiss: this.dismiss,
-                    onClick: toast.onClick ? (e) => toast.onClick(e, toast) : undefined,
+                    onClick: toast.onClick ? (e) => toast.onClick(e, toast, dismiss) : undefined,
                     calcRemaining: this.calcRemaining,
                     position,
                     ...props
