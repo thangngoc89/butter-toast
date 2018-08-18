@@ -154,7 +154,7 @@ If you have multiple trays in the page, using `raise` this way will emit the toa
 ```js
 import ButterToast from 'butter-toast';
 import `MyToast` from './MyToast';
-import React from 'react;
+import React from 'react';
 
 ButterToast.raise({
     namespace: 'my-tray',
@@ -268,6 +268,9 @@ Cinnamon.Slim.SCHEME_DARK;
 ```
 
 ## Crisp
+
+![crisp-blue](assets/crisp-blue.gif)
+
 Crisp exposes the following color schemes: `SCHEME_GREY`, `SCHEME_RED`, `SCHEME_ORANGE`, `SCHEME_PURPLE`, `SCHEME_GREEN`, `SCHEME_BLUE`.
 
 Crisp props:
@@ -280,8 +283,12 @@ Crisp props:
 | `icon` | `node` | `null` | Y | A component or a string containing the icon of the toast.
 | `scheme` | `string` | `SCHEME_GREY` | Y | The color scheme for the toast.
 
+![crisp-blue](assets/crisp-orange.gif)
+
 ## Crunch
 Crunch exposes the following color schemes: `SCHEME_GREY`, `SCHEME_RED`, `SCHEME_ORANGE`, `SCHEME_GREEN`, `SCHEME_BLUE`.
+
+![crisp-blue](assets/crunch-green.gif)
 
 Crunch props:
 
@@ -294,6 +301,9 @@ Crunch props:
 | `scheme` | `string` | `SCHEME_GREY` | Y | The color scheme for the toast.
 
 ## Slim
+
+![crisp-blue](assets/slim-light.gif)
+
 Crunch exposes the following color schemes: `SCHEME_DARK`, `SCHEME_LIGHT`.
 
 Crunch props:
@@ -302,3 +312,5 @@ Crunch props:
 |------|------|---------|----------|------------
 | `content` | `node` | `null` | Y | A component or a string containing the content of the toast.
 | `scheme` | `string` | `SCHEME_GREY` | Y | The color scheme for the toast.
+
+![crisp-blue](assets/slim-dark.gif)
